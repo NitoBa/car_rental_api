@@ -54,8 +54,12 @@ export class CategoryRepository implements ICategoryRepository {
     });
   }
 
-  delete(id: string): Promise<void> {
-    throw new Error('Method not implemented.');
+  async delete(id: string): Promise<void> {
+    const categoryIndex = this.categories.findIndex(
+      (category) => category.id === id
+    );
+
+    this.categories.splice(categoryIndex, 1);
   }
 
   async create({ name, description }: CreateCategoryDTO): Promise<void> {
