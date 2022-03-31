@@ -7,6 +7,11 @@ export class CategoryController {
 
   async create(req: Request, res: Response): Promise<Response> {
     const { name, description } = req.body;
+    const category = this.categoryRepository.findByName(name);
+
+    if (category) {
+      return res.status(400).json({ error: 'Category already exists' });
+    }
 
     this.categoryRepository.create({ name, description });
 

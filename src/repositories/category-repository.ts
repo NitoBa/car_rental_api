@@ -20,6 +20,10 @@ export class CategoryRepository {
     return this.categories.find((category) => category.id === id);
   }
 
+  findByName(name: string): Category {
+    return this.categories.find((category) => category.name === name);
+  }
+
   create({ name, description }: CreateCategoryDTO): void {
     const category = new Category();
 
