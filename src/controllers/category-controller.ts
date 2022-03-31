@@ -12,4 +12,10 @@ export class CategoryController {
 
     return res.status(201).send();
   }
+
+  async getAll(req: Request, res: Response): Promise<Response> {
+    const categories = this.categoryRepository.findAll();
+
+    return res.json(categories);
+  }
 }
