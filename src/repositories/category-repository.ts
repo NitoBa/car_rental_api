@@ -1,4 +1,4 @@
-import { categories } from '../database/categories';
+import { categories } from '../database/in-memory-db';
 import { Category } from '../entities/category';
 
 type CreateCategoryDTO = {
