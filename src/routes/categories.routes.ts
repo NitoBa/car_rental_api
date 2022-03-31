@@ -7,5 +7,6 @@ const controller = createController();
 
 categoryRouter.get('/', async (req, res) => controller.getAll(req, res));
 categoryRouter.post('/', async (req, res) => controller.create(req, res));
+categoryRouter.put('/:id', async (req, res) => controller.update(req, res));
 
 export { categoryRouter };

@@ -23,4 +23,19 @@ export class CategoryController {
 
     return res.json(categories);
   }
+
+  async update(req: Request, res: Response): Promise<Response> {
+    const { id } = req.params;
+    const { name, description } = req.body;
+
+    const category = this.categoryRepository.findById(id);
+
+    if (!category) {
+      return res.status(400).json({ error: 'Category not found' });
+    }
+
+    this.categoryRepository.update({ id, name, description });
+
+    return res.status(200).send();
+  }
 }
