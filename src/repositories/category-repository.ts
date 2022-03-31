@@ -1,0 +1,35 @@
+import { Category } from '../entities/category';
+
+type CreateCategoryDTO = {
+  name: string;
+  description: string;
+};
+
+export class CategoryRepository {
+  categories: Category[];
+
+  constructor() {
+    this.categories = [];
+  }
+
+  findAll(): Category[] {
+    return this.categories;
+  }
+
+  findById(id: string): Category {
+    return this.categories.find((category) => category.id === id);
+  }
+
+  create({ name, description }: CreateCategoryDTO): void {
+    const category = new Category();
+
+    Object.assign(category, {
+      name,
+      description,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    });
+
+    this.categories.push(category);
+  }
+}
