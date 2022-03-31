@@ -12,32 +12,41 @@ type UpdateCategoryDTO = {
   description: string;
 };
 
-export class CategoryRepository {
+export interface ICategoryRepository {
+  create(category: CreateCategoryDTO): Promise<void>;
+  update(category: UpdateCategoryDTO): Promise<void>;
+  delete(id: string): Promise<void>;
+  findById(id: string): Promise<Category>;
+  findAll(): Promise<Category[]>;
+  findByName(name: string): Promise<Category>;
+}
+
+export class CategoryRepository implements ICategoryRepository {
   categories: Category[];
   constructor() {
     this.categories = categories;
   }
 
-  findAll(): Category[] {
-    return this.categories;
+  async findAll(): Promise<Category[]> {
+    return categories;
   }
 
-  findById(id: string): Category {
-    return this.categories.find((category) => category.id === id);
+  async findById(id: string): Promise<Category> {
+    return categories.find((category) => category.id === id);
   }
 
-  findByName(name: string): Category {
-    return this.categories.find((category) => category.name === name);
+  async findByName(name: string): Promise<Category> {
+    return categories.find((category) => category.name === name);
   }
 
-  update({ id, name, description }: UpdateCategoryDTO): void {
+  async update({ id, name, description }: UpdateCategoryDTO): Promise<void> {
     const categoryIndex = this.categories.findIndex(
       (category) => category.id === id
     );
 
     const category = this.categories[categoryIndex];
 
-    this.categories[categoryIndex] = Object.assign(category, {
+    categories[categoryIndex] = Object.assign(category, {
       id,
       name,
       description,
@@ -45,7 +54,11 @@ export class CategoryRepository {
     });
   }
 
-  create({ name, description }: CreateCategoryDTO): void {
+  delete(id: string): Promise<void> {
+    throw new Error('Method not implemented.');
+  }
+
+  async create({ name, description }: CreateCategoryDTO): Promise<void> {
     const category = new Category();
 
     Object.assign(category, {
@@ -55,6 +68,6 @@ export class CategoryRepository {
       updatedAt: new Date(),
     });
 
-    this.categories.push(category);
+    categories.push(category);
   }
 }

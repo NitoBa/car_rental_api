@@ -1,25 +1,25 @@
 import { Request, Response } from 'express';
 
-import { CategoryRepository } from '../repositories/category-repository';
+import { ICategoryRepository } from '../repositories/category-repository';
 
 export class CategoryController {
-  constructor(private readonly categoryRepository: CategoryRepository) {}
+  constructor(private readonly categoryRepository: ICategoryRepository) {}
 
   async create(req: Request, res: Response): Promise<Response> {
     const { name, description } = req.body;
-    const category = this.categoryRepository.findByName(name);
+    const category = await this.categoryRepository.findByName(name);
 
     if (category) {
       return res.status(400).json({ error: 'Category already exists' });
     }
 
-    this.categoryRepository.create({ name, description });
+    await this.categoryRepository.create({ name, description });
 
     return res.status(201).send();
   }
 
   async getAll(req: Request, res: Response): Promise<Response> {
-    const categories = this.categoryRepository.findAll();
+    const categories = await this.categoryRepository.findAll();
 
     return res.json(categories);
   }
@@ -28,13 +28,13 @@ export class CategoryController {
     const { id } = req.params;
     const { name, description } = req.body;
 
-    const category = this.categoryRepository.findById(id);
+    const category = await this.categoryRepository.findById(id);
 
     if (!category) {
       return res.status(400).json({ error: 'Category not found' });
     }
 
-    this.categoryRepository.update({ id, name, description });
+    await this.categoryRepository.update({ id, name, description });
 
     return res.status(200).send();
   }
