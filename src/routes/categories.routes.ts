@@ -1,12 +1,10 @@
 import { Router } from 'express';
 
-import { CategoryController } from '../controllers/category-controller';
-import { CategoryRepository } from '../repositories/category-repository';
+import { CategoryControllerFactory } from '../factories/category-controller-factory';
 
 const categoryRouter = Router();
 
-const categoryRepository = new CategoryRepository();
-const controller = new CategoryController(categoryRepository);
+const controller = CategoryControllerFactory.create();
 
 categoryRouter.post('/', controller.create);
 
