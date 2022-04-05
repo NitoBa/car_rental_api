@@ -22,11 +22,6 @@ export interface ICategoryRepository {
 }
 
 export class CategoryRepository implements ICategoryRepository {
-  categories: Category[];
-  constructor() {
-    this.categories = categories;
-  }
-
   async findAll(): Promise<Category[]> {
     return categories;
   }
@@ -40,11 +35,11 @@ export class CategoryRepository implements ICategoryRepository {
   }
 
   async update({ id, name, description }: UpdateCategoryDTO): Promise<void> {
-    const categoryIndex = this.categories.findIndex(
+    const categoryIndex = categories.findIndex(
       (category) => category.id === id
     );
 
-    const category = this.categories[categoryIndex];
+    const category = categories[categoryIndex];
 
     categories[categoryIndex] = Object.assign(category, {
       id,
@@ -55,11 +50,11 @@ export class CategoryRepository implements ICategoryRepository {
   }
 
   async delete(id: string): Promise<void> {
-    const categoryIndex = this.categories.findIndex(
+    const categoryIndex = categories.findIndex(
       (category) => category.id === id
     );
 
-    this.categories.splice(categoryIndex, 1);
+    categories.splice(categoryIndex, 1);
   }
 
   async create({ name, description }: CreateCategoryDTO): Promise<void> {
