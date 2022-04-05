@@ -8,13 +8,13 @@ import {
 
 const categoryRouter = Router();
 
-categoryRouter.get('/', async (req, res) =>
+categoryRouter.get('/', (req, res) =>
   createGetAllCategoriesController().handle(req, res)
 );
-categoryRouter.post('/', async (req, res) =>
+categoryRouter.post('/', (req, res) =>
   createCategoryController().handle(req, res)
 );
-categoryRouter.put('/:id', async (req, res) =>
+categoryRouter.put('/:id', (req, res) =>
   updateAllCategoryController().handle(req, res)
 );
 

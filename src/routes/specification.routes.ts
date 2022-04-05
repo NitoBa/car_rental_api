@@ -8,13 +8,13 @@ import {
 
 const specificationRouter = Router();
 
-specificationRouter.post('/', async (req, res) =>
+specificationRouter.post('/', (req, res) =>
   createSpecificationController().handle(req, res)
 );
-specificationRouter.get('/', async (req, res) =>
+specificationRouter.get('/', (req, res) =>
   getAllSpecificationsController().handle(req, res)
 );
-specificationRouter.get('/:id', async (req, res) =>
+specificationRouter.get('/:id', (req, res) =>
   getSpecificationByIdController().handle(req, res)
 );
 
