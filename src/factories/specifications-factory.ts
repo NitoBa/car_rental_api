@@ -1,10 +1,10 @@
-import { SpecificationRepository } from '../repositories/specification-repository';
-import { CreateSpecificationController } from '../usecases/createSpecification/create-specification-controller';
-import { CreateSpecificationUsecase } from '../usecases/createSpecification/create-specification-usecase';
-import { GetAllSpecificationsController } from '../usecases/getAllSpecifications/get-all-specifications-controller';
-import { GetAllSpecificationsUsecase } from '../usecases/getAllSpecifications/get-all-specifications-usecase';
-import { GetSpecificationByIdController } from '../usecases/getSpecificationById/get-specification-by-id-controller';
-import { GetSpecificationByIdUsecase } from '../usecases/getSpecificationById/get-specification-by-id-usecase';
+import { CreateSpecificationController } from '../application/usecases/createSpecification/create-specification-controller';
+import { CreateSpecificationUsecase } from '../application/usecases/createSpecification/create-specification-usecase';
+import { GetAllSpecificationsController } from '../application/usecases/getAllSpecifications/get-all-specifications-controller';
+import { GetAllSpecificationsUsecase } from '../application/usecases/getAllSpecifications/get-all-specifications-usecase';
+import { GetSpecificationByIdController } from '../application/usecases/getSpecificationById/get-specification-by-id-controller';
+import { GetSpecificationByIdUsecase } from '../application/usecases/getSpecificationById/get-specification-by-id-usecase';
+import { SpecificationRepository } from '../infra/repositories/specification-repository';
 
 export const createSpecificationController = () => {
   const repository = new SpecificationRepository();

@@ -1,25 +1,10 @@
-import { categories } from '../database/in-memory-db';
-import { Category } from '../domain/entities/category';
-
-type CreateCategoryDTO = {
-  name: string;
-  description: string;
-};
-
-type UpdateCategoryDTO = {
-  id: string;
-  name: string;
-  description: string;
-};
-
-export interface ICategoryRepository {
-  create(category: CreateCategoryDTO): Promise<void>;
-  update(category: UpdateCategoryDTO): Promise<void>;
-  delete(id: string): Promise<void>;
-  findById(id: string): Promise<Category>;
-  findAll(): Promise<Category[]>;
-  findByName(name: string): Promise<Category>;
-}
+import {
+  CreateCategoryDTO,
+  ICategoryRepository,
+  UpdateCategoryDTO,
+} from '../../application/repositories/icategory-repository';
+import { categories } from '../../database/in-memory-db';
+import { Category } from '../../domain/entities/category';
 
 export class CategoryRepository implements ICategoryRepository {
   async findAll(): Promise<Category[]> {

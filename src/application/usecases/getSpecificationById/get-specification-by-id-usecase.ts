@@ -1,5 +1,5 @@
-import { Specification } from '../../domain/entities/specification';
-import { ISpecificationRepository } from '../../repositories/specification-repository';
+import { Specification } from '../../../domain/entities/specification';
+import { ISpecificationRepository } from '../../repositories/ispecifications-repository';
 
 export class GetSpecificationByIdUsecase {
   constructor(

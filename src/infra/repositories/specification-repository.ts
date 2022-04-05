@@ -1,17 +1,9 @@
-import { specifications } from '../database/in-memory-db';
-import { Specification } from '../domain/entities/specification';
-
-export type CreateSpecificationDTO = {
-  name: string;
-  description: string;
-};
-
-export interface ISpecificationRepository {
-  create({ name, description }: CreateSpecificationDTO): Promise<void>;
-  findAll(): Promise<Specification[]>;
-  findByName(name: string): Promise<Specification>;
-  findById(id: string): Promise<Specification>;
-}
+import {
+  CreateSpecificationDTO,
+  ISpecificationRepository,
+} from '../../application/repositories/ispecifications-repository';
+import { specifications } from '../../database/in-memory-db';
+import { Specification } from '../../domain/entities/specification';
 
 export class SpecificationRepository implements ISpecificationRepository {
   async findByName(name: string): Promise<Specification> {

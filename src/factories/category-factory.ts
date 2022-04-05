@@ -1,10 +1,10 @@
-import { CategoryRepository } from '../repositories/category-repository';
-import { CreateCategoryController } from '../usecases/createCategory/create-category-controller';
-import { CreateCategoryUsecase } from '../usecases/createCategory/create-category-usecase';
-import { GetAllCategoriesController } from '../usecases/getAllCategories/get-all-categories-controller';
-import { GetAllCategoriesUsecase } from '../usecases/getAllCategories/get-all-categories-usecase';
-import { UpdateCategoryController } from '../usecases/updateCategory/update-category-controller';
-import { UpdateCategoryUsecase } from '../usecases/updateCategory/update-category-usecase';
+import { CreateCategoryController } from '../application/usecases/createCategory/create-category-controller';
+import { CreateCategoryUsecase } from '../application/usecases/createCategory/create-category-usecase';
+import { GetAllCategoriesController } from '../application/usecases/getAllCategories/get-all-categories-controller';
+import { GetAllCategoriesUsecase } from '../application/usecases/getAllCategories/get-all-categories-usecase';
+import { UpdateCategoryController } from '../application/usecases/updateCategory/update-category-controller';
+import { UpdateCategoryUsecase } from '../application/usecases/updateCategory/update-category-usecase';
+import { CategoryRepository } from '../infra/repositories/category-repository';
 
 export const createCategoryController = () => {
   const repository = new CategoryRepository();
