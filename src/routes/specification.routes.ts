@@ -1,13 +1,21 @@
 import { Router } from 'express';
 
-import { createController } from '../factories/specification-controller-factory';
+import {
+  createSpecificationController,
+  getAllSpecificationsController,
+  getSpecificationByIdController,
+} from '../factories/specifications-factory';
 
 const specificationRouter = Router();
 
-const controller = createController();
-
-specificationRouter.post('/', async (req, res) => controller.create(req, res));
-specificationRouter.get('/', async (req, res) => controller.index(req, res));
-specificationRouter.get('/:id', async (req, res) => controller.show(req, res));
+specificationRouter.post('/', async (req, res) =>
+  createSpecificationController().handle(req, res)
+);
+specificationRouter.get('/', async (req, res) =>
+  getAllSpecificationsController().handle(req, res)
+);
+specificationRouter.get('/:id', async (req, res) =>
+  getSpecificationByIdController().handle(req, res)
+);
 
 export { specificationRouter };

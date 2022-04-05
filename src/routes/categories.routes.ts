@@ -1,12 +1,21 @@
 import { Router } from 'express';
 
-import { createController } from '../factories/category-controller-factory';
+import {
+  createCategoryController,
+  createGetAllCategoriesController,
+  updateAllCategoryController,
+} from '../factories/category-factory';
 
 const categoryRouter = Router();
-const controller = createController();
 
-categoryRouter.get('/', async (req, res) => controller.getAll(req, res));
-categoryRouter.post('/', async (req, res) => controller.create(req, res));
-categoryRouter.put('/:id', async (req, res) => controller.update(req, res));
+categoryRouter.get('/', async (req, res) =>
+  createGetAllCategoriesController().handle(req, res)
+);
+categoryRouter.post('/', async (req, res) =>
+  createCategoryController().handle(req, res)
+);
+categoryRouter.put('/:id', async (req, res) =>
+  updateAllCategoryController().handle(req, res)
+);
 
 export { categoryRouter };
