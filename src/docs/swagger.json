@@ -3,5 +3,414 @@
   "info": {
     "title": "Car Rental API - Aluguel de Carros",
     "version": "0.0.1"
+  },
+  "paths": {
+    "/categories": {
+      "post": {
+        "tags": [
+          "Category"
+        ],
+        "summary": "Create a new category",
+        "description": "This route is used to create a new category",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "example": "SUV"
+                  },
+                  "description": {
+                    "type": "string",
+                    "example": "Categoria de carrros SUV"
+                  }
+                },
+                "required": [
+                  "name",
+                  "description"
+                ],
+                "example": {
+                  "name": "SUV",
+                  "description": "Categoria de carrros SUV"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Category created",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "400": {
+            "description": "Category already exists",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Category already exists"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Category"
+        ],
+        "summary": "Get all categories",
+        "description": "This route is used to get all categories registered",
+        "responses": {
+          "200": {
+            "description": "Categories found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "properties": {
+                      "id": {
+                        "type": "string",
+                        "example": "6acd1379-8f15-469f-b964-55f45cda308a"
+                      },
+                      "name": {
+                        "type": "string",
+                        "example": "SUV"
+                      },
+                      "description": {
+                        "type": "string",
+                        "example": "Categoria de carrros SUV"
+                      },
+                      "createdAt": {
+                        "type": "string",
+                        "example": "2022-04-05T08:40:11.021Z"
+                      },
+                      "updatedAt": {
+                        "type": "string",
+                        "example": "2022-04-05T08:40:11.021Z"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/categories/{id}":{
+      "put": {
+        "tags": [
+          "Category"
+        ],
+        "summary": "Update a category",
+        "description": "This route is used to update a category",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Category ID",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "6acd1379-8f15-469f-b964-55f45cda308a"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "example": "SUV"
+                  },
+                  "description": {
+                    "type": "string",
+                    "example": "Categoria de carrros SUV"
+                  }
+                },
+                "required": [
+                  "name",
+                  "description"
+                ],
+                "example": {
+                  "name": "SUV",
+                  "description": "Categoria de carrros SUV"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Category updated",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "404": {
+            "description": "Category not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Category not found"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/categories/import": {
+      "post": {
+        "tags": [
+          "Category"
+        ],
+        "summary": "Import categories",
+        "description": "This route is used to import categories from csv file",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "file": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Category imported with success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Categories imported with success"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "File big",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "This file must be smaller than 1MB"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/specifications": {
+      "post": {
+        "tags": [
+          "Specification"
+        ],
+        "summary": "Create a new specification",
+        "description": "This route is used to create a new specification",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "example": "Câmbio"
+                  },
+                  "description": {
+                    "type": "string",
+                    "example": "Carro com câmbio automático"
+                  }
+                },
+                "required": [
+                  "name",
+                  "description"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Specification created",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "400": {
+            "description": "Specification already exists",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Specification already exists"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Specification"
+        ],
+        "summary": "Get all specifications",
+        "description": "This route is used to get all specifications registered",
+        "responses": {
+          "200": {
+            "description": "Specifications found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "properties": {
+                      "id": {
+                        "type": "string",
+                        "example": "6acd1379-8f15-469f-b964-55f45cda308a"
+                      },
+                      "name": {
+                        "type": "string",
+                        "example": "Câmbio"
+                      },
+                      "description": {
+                        "type": "string",
+                        "example": "Carro com câmbio automático"
+                      },
+                      "createdAt": {
+                        "type": "string",
+                        "example": "2022-04-05T08:40:11.021Z"
+                      },
+                      "updatedAt": {
+                        "type": "string",
+                        "example": "2022-04-05T08:40:11.021Z"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/specifications/{id}": {
+      "get": {
+        "tags": [
+          "Specification"
+        ],
+        "summary": "Get a specification",
+        "description": "This route is used to get a specification",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Specification ID",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "6acd1379-8f15-469f-b964-55f45cda308a"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Specification found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "example": "6acd1379-8f15-469f-b964-55f45cda308a"
+                    },
+                    "name": {
+                      "type": "string",
+                      "example": "Câmbio"
+                    },
+                    "description": {
+                      "type": "string",
+                      "example": "Carro com câmbio automático"
+                    },
+                    "createdAt": {
+                      "type": "string",
+                      "example": "2022-04-05T08:40:11.021Z"
+                    },
+                    "updatedAt": {
+                      "type": "string",
+                      "example": "2022-04-05T08:40:11.021Z"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Specification not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Specification not found"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
   }
 }
