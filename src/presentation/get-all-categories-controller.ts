@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 
-import { GetAllCategoriesUsecase } from '../application/usecases/getAllCategories/get-all-categories-usecase';
+import { GetAllCategoriesUsecase } from '../application/usecases/get-all-categories-usecase';
 
 export class GetAllCategoriesController {
   constructor(private readonly getAllCategories: GetAllCategoriesUsecase) {}

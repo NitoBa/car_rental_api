@@ -1,4 +1,4 @@
-import { ICategoryRepository } from '../../repositories/icategory-repository';
+import { ICategoryRepository } from '../repositories/icategory-repository';
 
 type UpdateCategoryDTO = {
   id: string;

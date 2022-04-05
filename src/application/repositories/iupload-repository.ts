@@ -1,1 +1,3 @@
-export interface IUploadRepository {}
+export interface IUploadRepository {
+  upload(file: File): Promise<string>;
+}

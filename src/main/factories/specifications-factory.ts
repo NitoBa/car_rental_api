@@ -1,6 +1,6 @@
-import { CreateSpecificationUsecase } from '../../application/usecases/createSpecification/create-specification-usecase';
-import { GetAllSpecificationsUsecase } from '../../application/usecases/getAllSpecifications/get-all-specifications-usecase';
-import { GetSpecificationByIdUsecase } from '../../application/usecases/getSpecificationById/get-specification-by-id-usecase';
+import { CreateSpecificationUsecase } from '../../application/usecases/create-specification-usecase';
+import { GetAllSpecificationsUsecase } from '../../application/usecases/get-all-specifications-usecase';
+import { GetSpecificationByIdUsecase } from '../../application/usecases/get-specification-by-id-usecase';
 import { SpecificationRepository } from '../../infra/repositories/specification-repository';
 import { CreateSpecificationController } from '../../presentation/create-specification-controller';
 import { GetAllSpecificationsController } from '../../presentation/get-all-specifications-controller';

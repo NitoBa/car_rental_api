@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 
-import { GetSpecificationByIdUsecase } from '../application/usecases/getSpecificationById/get-specification-by-id-usecase';
+import { GetSpecificationByIdUsecase } from '../application/usecases/get-specification-by-id-usecase';
 
 export class GetSpecificationByIdController {
   constructor(private getSpecificationById: GetSpecificationByIdUsecase) {}

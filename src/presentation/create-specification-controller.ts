@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 
-import { CreateSpecificationUsecase } from '../application/usecases/createSpecification/create-specification-usecase';
+import { CreateSpecificationUsecase } from '../application/usecases/create-specification-usecase';
 
 export class CreateSpecificationController {
   constructor(

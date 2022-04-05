@@ -1,4 +1,4 @@
-import { ISpecificationRepository } from '../../repositories/ispecifications-repository';
+import { ISpecificationRepository } from '../repositories/ispecifications-repository';
 
 type CreateSpecificationDTO = {
   name: string;

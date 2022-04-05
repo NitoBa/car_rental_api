@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 
-import { UpdateCategoryUsecase } from '../application/usecases/updateCategory/update-category-usecase';
+import { UpdateCategoryUsecase } from '../application/usecases/update-category-usecase';
 
 export class UpdateCategoryController {
   constructor(private readonly updateCategory: UpdateCategoryUsecase) {}
