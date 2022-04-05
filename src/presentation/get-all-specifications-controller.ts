@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 
-import { GetAllSpecificationsUsecase } from './get-all-specifications-usecase';
+import { GetAllSpecificationsUsecase } from '../application/usecases/getAllSpecifications/get-all-specifications-usecase';
 
 export class GetAllSpecificationsController {
   constructor(
