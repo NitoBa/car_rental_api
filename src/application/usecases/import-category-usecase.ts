@@ -26,12 +26,8 @@ export class ImportCategoryUsecase {
         categories.push({ name, description });
       });
 
-      parseFile.on('error', () => {
-        resolve([]);
-      });
-      parseFile.on('end', () => {
-        resolve(categories);
-      });
+      parseFile.on('error', () => resolve([]));
+      parseFile.on('end', () => resolve(categories));
     });
 
     return categories;
