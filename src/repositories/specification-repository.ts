@@ -8,9 +8,13 @@ export type CreateSpecificationDTO = {
 
 export interface ISpecificationRepository {
   create({ name, description }: CreateSpecificationDTO): Promise<void>;
+  findAll(): Promise<Specification[]>;
 }
 
 export class SpecificationRepository implements ISpecificationRepository {
+  async findAll(): Promise<Specification[]> {
+    return specifications;
+  }
   async create({ name, description }: CreateSpecificationDTO): Promise<void> {
     const specification = new Specification();
 

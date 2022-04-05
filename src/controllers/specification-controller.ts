@@ -21,4 +21,10 @@ export class SpecificationController {
 
     return res.status(201).send();
   }
+
+  async index(req: Request, res: Response): Promise<Response> {
+    const specifications = await this.specificationRepository.findAll();
+
+    return res.json(specifications);
+  }
 }
