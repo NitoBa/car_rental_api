@@ -1,5 +1,5 @@
 import { specifications } from '../database/in-memory-db';
-import { Specification } from '../entities/specification';
+import { Specification } from '../domain/entities/specification';
 
 export type CreateSpecificationDTO = {
   name: string;

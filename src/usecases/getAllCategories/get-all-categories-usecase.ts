@@ -1,4 +1,4 @@
-import { Category } from '../../entities/category';
+import { Category } from '../../domain/entities/category';
 import { ICategoryRepository } from '../../repositories/category-repository';
 
 export class GetAllCategoriesUsecase {

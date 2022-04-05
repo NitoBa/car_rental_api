@@ -1,5 +1,5 @@
 import { categories } from '../database/in-memory-db';
-import { Category } from '../entities/category';
+import { Category } from '../domain/entities/category';
 
 type CreateCategoryDTO = {
   name: string;

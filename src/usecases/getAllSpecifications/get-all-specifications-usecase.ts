@@ -1,4 +1,4 @@
-import { Specification } from '../../entities/specification';
+import { Specification } from '../../domain/entities/specification';
 import { ISpecificationRepository } from '../../repositories/specification-repository';
 
 export class GetAllSpecificationsUsecase {
