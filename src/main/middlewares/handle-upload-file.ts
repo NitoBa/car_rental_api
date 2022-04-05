@@ -1,8 +1,9 @@
 import { Request, Response, NextFunction } from 'express';
 import multer from 'multer';
+import { join } from 'node:path';
 
 const upload = multer({
-  dest: '../../../tmp',
+  dest: join(__dirname, '..', '..', '..', 'tmp'),
 });
 
 export const handleUploadFile = (
