@@ -3,8 +3,8 @@ import {
   ICategoryRepository,
   UpdateCategoryDTO,
 } from '../../application/repositories/icategory-repository';
-import { categories } from '../../database/in-memory-db';
 import { Category } from '../../domain/entities/category';
+import { categories } from '../../external/database/in-memory-db';
 
 export class CategoryRepository implements ICategoryRepository {
   async findAll(): Promise<Category[]> {

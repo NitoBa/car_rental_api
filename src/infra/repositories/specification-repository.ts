@@ -2,8 +2,8 @@ import {
   CreateSpecificationDTO,
   ISpecificationRepository,
 } from '../../application/repositories/ispecifications-repository';
-import { specifications } from '../../database/in-memory-db';
 import { Specification } from '../../domain/entities/specification';
+import { specifications } from '../../external/database/in-memory-db';
 
 export class SpecificationRepository implements ISpecificationRepository {
   async findByName(name: string): Promise<Specification> {
