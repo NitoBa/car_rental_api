@@ -1,0 +1,7 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Car Rental API - Aluguel de Carros",
+    "version": "0.0.1"
+  }
+}
