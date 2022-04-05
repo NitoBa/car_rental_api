@@ -10,18 +10,15 @@ const repository = new SpecificationRepository();
 
 export const createSpecificationController = () => {
   const usecase = new CreateSpecificationUsecase(repository);
-  const controller = new CreateSpecificationController(usecase);
-  return controller;
+  return new CreateSpecificationController(usecase);
 };
 
 export const getAllSpecificationsController = () => {
   const usecase = new GetAllSpecificationsUsecase(repository);
-  const controller = new GetAllSpecificationsController(usecase);
-  return controller;
+  return new GetAllSpecificationsController(usecase);
 };
 
 export const getSpecificationByIdController = () => {
   const usecase = new GetSpecificationByIdUsecase(repository);
-  const controller = new GetSpecificationByIdController(usecase);
-  return controller;
+  return new GetSpecificationByIdController(usecase);
 };

@@ -12,24 +12,20 @@ const repository = new CategoryRepository();
 
 export const createCategoryController = () => {
   const usecase = new CreateCategoryUsecase(repository);
-  const controller = new CreateCategoryController(usecase);
-  return controller;
+  return new CreateCategoryController(usecase);
 };
 
 export const createGetAllCategoriesController = () => {
   const usecase = new GetAllCategoriesUsecase(repository);
-  const controller = new GetAllCategoriesController(usecase);
-  return controller;
+  return new GetAllCategoriesController(usecase);
 };
 
 export const updateAllCategoryController = () => {
   const usecase = new UpdateCategoryUsecase(repository);
-  const controller = new UpdateCategoryController(usecase);
-  return controller;
+  return new UpdateCategoryController(usecase);
 };
 
 export const importCategoryController = () => {
   const usecase = new ImportCategoryUsecase(repository);
-  const controller = new ImportCategory(usecase);
-  return controller;
+  return new ImportCategory(usecase);
 };
