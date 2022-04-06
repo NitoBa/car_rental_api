@@ -2,7 +2,7 @@ import express from 'express';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import swaggerUi from 'swagger-ui-express';
 
-import swaggerDocument from '../docs/swagger.json';
+import swaggerDocument from './docs/swagger.json';
 import { appRouter } from './routes/routes';
 
 const app = express();
