@@ -3,10 +3,10 @@ import { GetAllCategoriesUsecase } from '../../application/usecases/get-all-cate
 import { ImportCategoryUsecase } from '../../application/usecases/import-category-usecase';
 import { UpdateCategoryUsecase } from '../../application/usecases/update-category-usecase';
 import { CategoryRepository } from '../../infra/repositories/category-repository';
-import { CreateCategoryController } from '../../presentation/create-category-controller';
-import { GetAllCategoriesController } from '../../presentation/get-all-categories-controller';
-import { ImportCategory } from '../../presentation/import-category-controller';
-import { UpdateCategoryController } from '../../presentation/update-category-controller';
+import { CreateCategoryController } from '../../presentation/controllers/create-category-controller';
+import { GetAllCategoriesController } from '../../presentation/controllers/get-all-categories-controller';
+import { ImportCategory } from '../../presentation/controllers/import-category-controller';
+import { UpdateCategoryController } from '../../presentation/controllers/update-category-controller';
 
 const repository = new CategoryRepository();
 

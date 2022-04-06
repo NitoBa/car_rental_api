@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 
-import { CreateCategoryUsecase } from '../application/usecases/create-category-usecase';
+import { CreateCategoryUsecase } from '../../application/usecases/create-category-usecase';
 
 export class CreateCategoryController {
   constructor(private readonly createCategory: CreateCategoryUsecase) {}
@@ -9,7 +9,7 @@ export class CreateCategoryController {
     try {
       await this.createCategory.execute({ name, description });
 
-      return res.status(201).send();
+      return res.status(201);
     } catch (err) {
       return res.status(400).json({
         message: err.message || 'Unexpected error.',

@@ -5,7 +5,6 @@
 
 ## Domain
     - Entities
-    - Usecase interfaces (maybe)
 
 ## Application / Data
     - Usecase implementations
@@ -14,7 +13,7 @@
 ## Infra
     - Repository implementations
   
-## Presenters / Controllers / Presentation
+## Presentation
     - Controllers
 
 ## Main
