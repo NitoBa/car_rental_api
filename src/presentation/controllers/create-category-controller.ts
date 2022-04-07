@@ -1,19 +1,26 @@
-import { Request, Response } from 'express';
-
 import { CreateCategoryUsecase } from '../../application/usecases/create-category-usecase';
+import { badRequest, noContent } from '../helpers/http-response-helper';
+import { IController } from '../interfaces/controller';
+import { HttpResponse } from '../interfaces/http-response';
 
-export class CreateCategoryController {
+type CreateCategoryRequest = {
+  name: string;
+  description: string;
+};
+
+export class CreateCategoryController
+  implements IController<CreateCategoryRequest>
+{
   constructor(private readonly createCategory: CreateCategoryUsecase) {}
-  async handle(req: Request, res: Response): Promise<Response> {
-    const { name, description } = req.body;
+  async handle({
+    name,
+    description,
+  }: CreateCategoryRequest): Promise<HttpResponse> {
     try {
       await this.createCategory.execute({ name, description });
-
-      return res.status(201);
-    } catch (err) {
-      return res.status(400).json({
-        message: err.message || 'Unexpected error.',
-      });
+      return noContent();
+    } catch (error) {
+      return badRequest(error);
     }
   }
 }

@@ -1,5 +1,6 @@
 import { Router } from 'express';
 
+import { adaptRouter } from '../adapters/express-router-adapter';
 import {
   createCategoryController,
   createGetAllCategoriesController,
@@ -13,9 +14,7 @@ const categoryRouter = Router();
 categoryRouter.get('/', (req, res) =>
   createGetAllCategoriesController().handle(req, res)
 );
-categoryRouter.post('/', (req, res) =>
-  createCategoryController().handle(req, res)
-);
+categoryRouter.post('/', adaptRouter(createCategoryController()));
 categoryRouter.put('/:id', (req, res) =>
   updateAllCategoryController().handle(req, res)
 );
