@@ -15,7 +15,9 @@ categoryRouter.get('/', adaptRouter(createGetAllCategoriesController()));
 categoryRouter.post('/', adaptRouter(createCategoryController()));
 categoryRouter.put('/:id', adaptRouter(updateAllCategoryController()));
 
-categoryRouter.post('/import', handleUploadFile, (req, res) =>
-  importCategoryController().handle(req, res)
+categoryRouter.post(
+  '/import',
+  handleUploadFile,
+  adaptRouter(importCategoryController())
 );
 export { categoryRouter };

@@ -1,21 +1,24 @@
-import { Request, Response } from 'express';
 import { rm } from 'node:fs/promises';
 
 import { ImportCategoryUsecase } from '../../application/usecases/import-category-usecase';
+import { badRequest, ok } from '../helpers/http-response-helper';
+import { IController } from '../interfaces/controller';
+import { HttpResponse } from '../interfaces/http-response';
 
-export class ImportCategory {
+type ImportCategoryRequest = {
+  file: any;
+};
+
+export class ImportCategory implements IController<ImportCategoryRequest> {
   constructor(private importCategory: ImportCategoryUsecase) {}
-  async handle(req: Request, res: Response): Promise<Response> {
+  async handle({ file }: ImportCategoryRequest): Promise<HttpResponse> {
     try {
-      await this.importCategory.execute(req.file);
-      await rm(req.file.path);
-      return res
-        .status(200)
-        .json({ message: 'Categories imported successfully' });
+      await this.importCategory.execute(file);
+      await rm(file.path);
+
+      return ok({ message: 'Categories imported successfully' });
     } catch (err) {
-      return res.status(400).json({
-        message: err.message || 'Unexpected error.',
-      });
+      return badRequest(err);
     }
   }
 }
