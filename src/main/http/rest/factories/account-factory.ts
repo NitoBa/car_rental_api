@@ -28,5 +28,5 @@ export const createAuthenticateUserController = () => {
 };
 
 export const createEnsureAuthenticatedMiddleware = () => {
-  return new EnsureAuthenticatedMiddleware(jwtRepository);
+  return new EnsureAuthenticatedMiddleware(jwtRepository, usersRepository);
 };

@@ -1,4 +1,5 @@
 import { IJwtRepository } from '../../../../application/repositories/ijwt-repository';
+import { IUsersRepository } from '../../../../application/repositories/iusers-repository';
 import {
   ok,
   unauthorized,
@@ -15,7 +16,10 @@ type EnsureAuthenticatedRequest = {
 export class EnsureAuthenticatedMiddleware
   implements IMiddleware<EnsureAuthenticatedRequest>
 {
-  constructor(private jwtRepository: IJwtRepository) {}
+  constructor(
+    private jwtRepository: IJwtRepository,
+    private usersRepository: IUsersRepository
+  ) {}
 
   async handle(req: EnsureAuthenticatedRequest): Promise<HttpResponse> {
     try {
@@ -31,7 +35,13 @@ export class EnsureAuthenticatedMiddleware
         return unauthorized(new Error('Token not provided'));
       }
 
-      this.jwtRepository.verify(token);
+      const { sub: userId } = this.jwtRepository.verify(token);
+
+      const user = await this.usersRepository.findUserById(userId);
+
+      if (!user) {
+        return unauthorized(new Error('User does not exists'));
+      }
 
       return ok(null);
     } catch (error) {
