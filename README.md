@@ -19,6 +19,7 @@
 ## Main
     - Factories / Composes
     - Middleware's
+    - Adapters
     - Routes
     - Entry point server
 
