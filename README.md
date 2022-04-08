@@ -21,3 +21,8 @@
     - Middleware's
     - Routes
     - Entry point server
+
+## TODO: Implement
+    - [ ] Swagger docs to create users
+    - [ ] Swagger docs to login users
+    - [ ] Add Tsryng to work with dependency injection (another branch)
