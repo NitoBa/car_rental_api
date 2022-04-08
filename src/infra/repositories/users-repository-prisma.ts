@@ -28,7 +28,6 @@ export class AccountRepositoryPrisma implements IUsersRepository {
     name,
     email,
     password,
-    admin,
     driver_license,
   }: CreateUserDto): Promise<void> {
     await this.prisma.user.create({
@@ -37,7 +36,6 @@ export class AccountRepositoryPrisma implements IUsersRepository {
         name,
         email,
         password,
-        admin,
         driver_license,
       },
     });

@@ -5,7 +5,6 @@ export type CreateUserDto = {
   name: string;
   email: string;
   password: string;
-  admin: boolean;
   driver_license: string;
 };
 
