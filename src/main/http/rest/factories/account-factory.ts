@@ -1,11 +1,13 @@
 import { CreateUserUsecase } from '../../../../application/usecases/create-user-usecase';
 import { LoginEmailPasswordUsecase } from '../../../../application/usecases/login-email-password-usecase';
+import { UpdateUserAvatarUsecase } from '../../../../application/usecases/update-user-avatar-usecase';
 import { prisma } from '../../../../external/database/prisma-service';
 import { EncryptRepositoryBcrypt } from '../../../../infra/repositories/encrypt-repository-bcrypt';
 import { JwtRepository } from '../../../../infra/repositories/jwt-repository';
 import { UsersRepositoryPrisma } from '../../../../infra/repositories/users-repository-prisma';
 import { AuthenticateUserController } from '../../../../presentation/controllers/authenticate-user-controller';
 import { CreateUserController } from '../../../../presentation/controllers/create-user-controller';
+import { UpdateUserAvatarController } from '../../../../presentation/controllers/update-user-avatar-controller';
 import { EnsureAuthenticatedMiddleware } from '../middlewares/ensure-authenticated';
 
 const usersRepository = new UsersRepositoryPrisma(prisma);
@@ -29,4 +31,9 @@ export const createAuthenticateUserController = () => {
 
 export const createEnsureAuthenticatedMiddleware = () => {
   return new EnsureAuthenticatedMiddleware(jwtRepository, usersRepository);
+};
+
+export const createUpdateUserAvatarController = () => {
+  const usecase = new UpdateUserAvatarUsecase(usersRepository);
+  return new UpdateUserAvatarController(usecase);
 };
