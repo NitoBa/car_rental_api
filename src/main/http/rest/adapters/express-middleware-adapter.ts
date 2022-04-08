@@ -7,6 +7,10 @@ export const adaptMiddleware = (middleware: IMiddleware) => {
     const httpResponse = await middleware.handle(req);
 
     if (httpResponse.statusCode >= 200 && httpResponse.statusCode <= 209) {
+      if (httpResponse.body) {
+        req.data = httpResponse.body;
+      }
+
       next();
     } else {
       res.status(httpResponse.statusCode).json({
