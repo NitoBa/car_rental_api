@@ -6,6 +6,7 @@ import { JwtRepository } from '../../../../infra/repositories/jwt-repository';
 import { UsersRepositoryPrisma } from '../../../../infra/repositories/users-repository-prisma';
 import { AuthenticateUserController } from '../../../../presentation/controllers/authenticate-user-controller';
 import { CreateUserController } from '../../../../presentation/controllers/create-user-controller';
+import { EnsureAuthenticatedMiddleware } from '../middlewares/ensure-authenticated';
 
 const usersRepository = new UsersRepositoryPrisma(prisma);
 const encryptRepository = new EncryptRepositoryBcrypt();
@@ -24,4 +25,8 @@ export const createAuthenticateUserController = () => {
   );
 
   return new AuthenticateUserController(usecase);
+};
+
+export const createEnsureAuthenticatedMiddleware = () => {
+  return new EnsureAuthenticatedMiddleware(jwtRepository);
 };
