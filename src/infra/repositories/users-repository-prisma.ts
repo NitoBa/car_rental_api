@@ -6,6 +6,13 @@ import { User } from '../../domain/entities/user';
 
 export class AccountRepositoryPrisma implements IUsersRepository {
   constructor(private prisma: PrismaClient) {}
+  async findUserByUsername(username: string): Promise<User> {
+    const user = await this.prisma.user.findUnique({
+      where: { username },
+    });
+
+    return user;
+  }
 
   async findUserByEmail(email: string): Promise<User | null | undefined> {
     const user = await this.prisma.user.findUnique({
