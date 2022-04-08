@@ -6,6 +6,7 @@ import { IController } from '../interfaces/controller';
 import { HttpResponse } from '../interfaces/http-response';
 
 type ImportCategoryRequest = {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   file: any;
 };
 
