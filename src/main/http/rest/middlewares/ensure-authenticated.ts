@@ -38,12 +38,11 @@ export class EnsureAuthenticatedMiddleware
       const { sub: userId } = this.jwtRepository.verify(token);
 
       const user = await this.usersRepository.findUserById(userId);
-
       if (!user) {
         return unauthorized(new Error('User does not exists'));
       }
 
-      return ok(user);
+      return ok(user.id);
     } catch (error) {
       return unauthorized(error);
     }

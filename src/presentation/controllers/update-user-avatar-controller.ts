@@ -1,10 +1,32 @@
 import { UpdateUserAvatarUsecase } from '../../application/usecases/update-user-avatar-usecase';
+import { badRequest, noContent } from '../helpers/http-response-helper';
 import { IController } from '../interfaces/controller';
 import { HttpResponse } from '../interfaces/http-response';
 
-export class UpdateUserAvatarController implements IController {
+type UpdateUserAvatarRequest = {
+  file: any;
+  headers: {
+    userId: any;
+  };
+};
+
+export class UpdateUserAvatarController
+  implements IController<UpdateUserAvatarRequest>
+{
   constructor(private updateAvatarUserUsecase: UpdateUserAvatarUsecase) {}
-  handle(request: any): Promise<HttpResponse> {
-    throw new Error('Method not implemented.');
+  async handle(request: UpdateUserAvatarRequest): Promise<HttpResponse> {
+    try {
+      const { userId } = request.headers;
+      const avatar_file = request.file.filename;
+
+      await this.updateAvatarUserUsecase.execute({
+        userId,
+        avatar_file,
+      });
+
+      return noContent();
+    } catch (error) {
+      return badRequest(error);
+    }
   }
 }

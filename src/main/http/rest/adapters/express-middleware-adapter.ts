@@ -8,7 +8,7 @@ export const adaptMiddleware = (middleware: IMiddleware) => {
 
     if (httpResponse.statusCode >= 200 && httpResponse.statusCode <= 209) {
       if (httpResponse.body) {
-        req.data = httpResponse.body;
+        req.headers.userId = httpResponse.body;
       }
 
       next();
