@@ -9,7 +9,6 @@ export class CreateUserUsecase {
   ) {}
 
   async execute(input: CreateUserDTO): Promise<void> {
-    console.log('input', input);
     const { name, username, email, password, driver_license } = input;
 
     if (!name || !username || !email || !password || !driver_license) {
