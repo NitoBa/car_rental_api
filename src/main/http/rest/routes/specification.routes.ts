@@ -11,8 +11,6 @@ const specificationRouter = Router();
 
 specificationRouter.post('/', adaptRouter(createSpecificationController()));
 specificationRouter.get('/', adaptRouter(getAllSpecificationsController()));
-specificationRouter.get('/:id', (req, res) =>
-  getSpecificationByIdController().handle(req, res)
-);
+specificationRouter.get('/:id', adaptRouter(getSpecificationByIdController()));
 
 export { specificationRouter };
