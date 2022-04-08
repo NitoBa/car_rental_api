@@ -1,27 +1,33 @@
-import { Request, Response } from 'express';
+import { CreateSpecificationUsecase } from '../../application/usecases/create-specification-usecase';
+import { badRequest, created } from '../helpers/http-response-helper';
+import { IController } from '../interfaces/controller';
+import { HttpResponse } from '../interfaces/http-response';
 
-import { CreateSpecificationUsecase } from '../application/usecases/create-specification-usecase';
+type CreateSpecificationRequest = {
+  body: {
+    name: string;
+    description: string;
+  };
+};
 
-export class CreateSpecificationController {
+export class CreateSpecificationController
+  implements IController<CreateSpecificationRequest>
+{
   constructor(
     private readonly createSpecification: CreateSpecificationUsecase
   ) {}
-
-  async handle(req: Request, res: Response): Promise<Response> {
-    const { name, description } = req.body;
-
+  async handle({
+    body: { name, description },
+  }: CreateSpecificationRequest): Promise<HttpResponse> {
     try {
+      console.log(`${name}: ${description}`);
       if (!description || !name) {
-        return res.status(400).json({ error: 'Missing parameters' });
+        return badRequest(new Error('Missing parameters'));
       }
-
       await this.createSpecification.execute({ name, description });
-
-      return res.status(201).send();
+      return created();
     } catch (error) {
-      return res.status(400).json({
-        message: error.message || 'Unexpected error.',
-      });
+      return badRequest(error);
     }
   }
 }

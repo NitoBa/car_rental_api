@@ -1,5 +1,6 @@
 import { Router } from 'express';
 
+import { adaptRouter } from '../adapters/express-router-adapter';
 import {
   createSpecificationController,
   getAllSpecificationsController,
@@ -8,9 +9,7 @@ import {
 
 const specificationRouter = Router();
 
-specificationRouter.post('/', (req, res) =>
-  createSpecificationController().handle(req, res)
-);
+specificationRouter.post('/', adaptRouter(createSpecificationController()));
 specificationRouter.get('/', (req, res) =>
   getAllSpecificationsController().handle(req, res)
 );

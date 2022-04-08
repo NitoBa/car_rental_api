@@ -4,8 +4,10 @@ import { IController } from '../interfaces/controller';
 import { HttpResponse } from '../interfaces/http-response';
 
 type CreateCategoryRequest = {
-  name: string;
-  description: string;
+  body: {
+    name: string;
+    description: string;
+  };
 };
 
 export class CreateCategoryController
@@ -13,8 +15,7 @@ export class CreateCategoryController
 {
   constructor(private readonly createCategory: CreateCategoryUsecase) {}
   async handle({
-    name,
-    description,
+    body: { name, description },
   }: CreateCategoryRequest): Promise<HttpResponse> {
     try {
       await this.createCategory.execute({ name, description });
