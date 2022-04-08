@@ -3,7 +3,6 @@ import { GetAllCategoriesUsecase } from '../../../../application/usecases/get-al
 import { ImportCategoryUsecase } from '../../../../application/usecases/import-category-usecase';
 import { UpdateCategoryUsecase } from '../../../../application/usecases/update-category-usecase';
 import { prisma } from '../../../../external/database/prisma-service';
-import { CategoryRepository } from '../../../../infra/repositories/category-repository';
 import { CategoryRepositoryPrisma } from '../../../../infra/repositories/category-repository-prisma';
 import { CreateCategoryController } from '../../../../presentation/controllers/create-category-controller';
 import { GetAllCategoriesController } from '../../../../presentation/controllers/get-all-categories-controller';
