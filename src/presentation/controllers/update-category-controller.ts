@@ -1,22 +1,36 @@
-import { Request, Response } from 'express';
-
 import { UpdateCategoryUsecase } from '../../application/usecases/update-category-usecase';
+import { badRequest, noContent } from '../helpers/http-response-helper';
+import { IController } from '../interfaces/controller';
+import { HttpResponse } from '../interfaces/http-response';
 
-export class UpdateCategoryController {
+type UpdateCategoryRequest = {
+  params: {
+    id: string;
+  };
+  body: {
+    name: string;
+    description: string;
+  };
+};
+
+export class UpdateCategoryController
+  implements IController<UpdateCategoryRequest>
+{
   constructor(private readonly updateCategory: UpdateCategoryUsecase) {}
 
-  async handle(req: Request, res: Response): Promise<Response> {
+  async handle(req: UpdateCategoryRequest): Promise<HttpResponse> {
     const { id } = req.params;
     const { name, description } = req.body;
 
     try {
-      await this.updateCategory.execute({ id, name, description });
+      if (!name || !description) {
+        return badRequest(new Error('name and description are required'));
+      }
 
-      return res.status(204).send();
+      await this.updateCategory.execute({ id, name, description });
+      return noContent();
     } catch (err) {
-      return res.status(400).json({
-        message: err.message || 'Unexpected error.',
-      });
+      return badRequest(err);
     }
   }
 }
