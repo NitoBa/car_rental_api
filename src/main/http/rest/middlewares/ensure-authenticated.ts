@@ -43,7 +43,7 @@ export class EnsureAuthenticatedMiddleware
         return unauthorized(new Error('User does not exists'));
       }
 
-      return ok(null);
+      return ok(user);
     } catch (error) {
       return unauthorized(error);
     }
