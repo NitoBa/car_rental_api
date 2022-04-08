@@ -4,7 +4,7 @@ import { CreateUserDTO } from '../../application/dtos/create-user-dto';
 import { IUsersRepository } from '../../application/repositories/iusers-repository';
 import { User } from '../../domain/entities/user';
 
-export class AccountRepositoryPrisma implements IUsersRepository {
+export class UsersRepositoryPrisma implements IUsersRepository {
   constructor(private prisma: PrismaClient) {}
   async findUserByUsername(username: string): Promise<User> {
     const user = await this.prisma.user.findUnique({
