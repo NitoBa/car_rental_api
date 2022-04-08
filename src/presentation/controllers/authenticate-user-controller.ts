@@ -10,7 +10,9 @@ type AuthenticateUserRequest = {
   };
 };
 
-export class AuthenticateUser implements IController<AuthenticateUserRequest> {
+export class AuthenticateUserController
+  implements IController<AuthenticateUserRequest>
+{
   constructor(
     private loginWithEmailPasswordUsecase: LoginEmailPasswordUsecase
   ) {}
