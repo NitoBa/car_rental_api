@@ -4,8 +4,7 @@ import { IEncryptRepository } from '../../application/repositories/iencrypt-repo
 
 export class EncryptRepositoryBcrypt implements IEncryptRepository {
   async encrypt(value: string): Promise<string> {
-    const salt = process.env.HASH_SALT;
-    return hash(value, salt);
+    return hash(value, 10);
   }
   async compare(value: string, hashedValue: string): Promise<boolean> {
     return compare(value, hashedValue);

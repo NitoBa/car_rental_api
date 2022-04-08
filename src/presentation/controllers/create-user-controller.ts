@@ -17,6 +17,7 @@ export class CreateUserController implements IController<CreateUserRequest> {
 
       return created();
     } catch (error) {
+      console.log(error);
       return badRequest(error);
     }
   }
