@@ -1,9 +1,7 @@
 import { PrismaClient } from '@prisma/client';
 
-import {
-  CreateSpecificationDTO,
-  ISpecificationRepository,
-} from '../../application/repositories/ispecifications-repository';
+import { CreateSpecificationDTO } from '../../application/dtos/create-specification-dto';
+import { ISpecificationRepository } from '../../application/repositories/ispecifications-repository';
 import { Specification } from '../../domain/entities/specification';
 
 export class SpecificationRepositoryPrisma implements ISpecificationRepository {

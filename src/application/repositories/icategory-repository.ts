@@ -1,15 +1,6 @@
 import { Category } from '../../domain/entities/category';
-
-export type CreateCategoryDTO = {
-  name: string;
-  description: string;
-};
-
-export type UpdateCategoryDTO = {
-  id: string;
-  name: string;
-  description: string;
-};
+import { CreateCategoryDTO } from '../dtos/create-category-dto';
+import { UpdateCategoryDTO } from '../dtos/update-category-dto';
 
 export interface ICategoryRepository {
   create(category: CreateCategoryDTO): Promise<void>;

@@ -1,10 +1,8 @@
 import { PrismaClient } from '@prisma/client';
 
-import {
-  CreateCategoryDTO,
-  ICategoryRepository,
-  UpdateCategoryDTO,
-} from '../../application/repositories/icategory-repository';
+import { CreateCategoryDTO } from '../../application/dtos/create-category-dto';
+import { UpdateCategoryDTO } from '../../application/dtos/update-category-dto';
+import { ICategoryRepository } from '../../application/repositories/icategory-repository';
 import { Category } from '../../domain/entities/category';
 
 export class CategoryRepositoryPrisma implements ICategoryRepository {
