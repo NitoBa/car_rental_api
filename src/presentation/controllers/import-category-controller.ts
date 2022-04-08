@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { rm } from 'node:fs/promises';
 
-import { ImportCategoryUsecase } from '../application/usecases/import-category-usecase';
+import { ImportCategoryUsecase } from '../../application/usecases/import-category-usecase';
 
 export class ImportCategory {
   constructor(private importCategory: ImportCategoryUsecase) {}
