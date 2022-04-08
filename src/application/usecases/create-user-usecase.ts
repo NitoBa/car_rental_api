@@ -9,13 +9,15 @@ export class CreateUserUsecase {
   ) {}
 
   async execute(input: CreateUserDTO): Promise<void> {
+    console.log('input', input);
     const { name, username, email, password, driver_license } = input;
 
     if (!name || !username || !email || !password || !driver_license) {
       throw new Error('Missing fields');
     }
-
-    const userAlreadyExistsEmail = this.usersRepository.findUserByEmail(email);
+    const userAlreadyExistsEmail = await this.usersRepository.findUserByEmail(
+      email
+    );
 
     if (userAlreadyExistsEmail) {
       throw new Error('User already exists with this email');
@@ -28,9 +30,6 @@ export class CreateUserUsecase {
       throw new Error('User already exists with this username');
     }
 
-    // TODO: Validate driver license
-
-    // TODO: hash password
     const passwordHashed = await this.encryptRepository.encrypt(password);
 
     await this.usersRepository.create({
