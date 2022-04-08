@@ -11,9 +11,7 @@ import { handleUploadFile } from '../middlewares/handle-upload-file';
 
 const categoryRouter = Router();
 
-categoryRouter.get('/', (req, res) =>
-  createGetAllCategoriesController().handle(req, res)
-);
+categoryRouter.get('/', adaptRouter(createGetAllCategoriesController()));
 categoryRouter.post('/', adaptRouter(createCategoryController()));
 categoryRouter.put('/:id', (req, res) =>
   updateAllCategoryController().handle(req, res)

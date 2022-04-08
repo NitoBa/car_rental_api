@@ -1,19 +1,16 @@
-import { Request, Response } from 'express';
-
 import { GetAllCategoriesUsecase } from '../../application/usecases/get-all-categories-usecase';
+import { badRequest, ok } from '../helpers/http-response-helper';
+import { IController } from '../interfaces/controller';
+import { HttpResponse } from '../interfaces/http-response';
 
-export class GetAllCategoriesController {
+export class GetAllCategoriesController implements IController {
   constructor(private readonly getAllCategories: GetAllCategoriesUsecase) {}
-
-  async handle(req: Request, res: Response): Promise<Response> {
+  async handle(): Promise<HttpResponse> {
     try {
       const categories = await this.getAllCategories.execute();
-
-      return res.json(categories);
+      return ok(categories);
     } catch (error) {
-      return res.status(400).json({
-        message: error.message || 'Unexpected error.',
-      });
+      return badRequest(error);
     }
   }
 }
