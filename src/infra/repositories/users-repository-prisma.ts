@@ -1,9 +1,7 @@
 import { PrismaClient } from '@prisma/client';
 
-import {
-  CreateUserDto,
-  IUsersRepository,
-} from '../../application/repositories/iusers-repository';
+import { CreateUserDTO } from '../../application/dtos/create-user-dto';
+import { IUsersRepository } from '../../application/repositories/iusers-repository';
 import { User } from '../../domain/entities/user';
 
 export class AccountRepositoryPrisma implements IUsersRepository {
@@ -29,7 +27,7 @@ export class AccountRepositoryPrisma implements IUsersRepository {
     email,
     password,
     driver_license,
-  }: CreateUserDto): Promise<void> {
+  }: CreateUserDTO): Promise<void> {
     await this.prisma.user.create({
       data: {
         username,

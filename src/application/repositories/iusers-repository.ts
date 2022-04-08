@@ -1,15 +1,8 @@
 import { User } from '../../domain/entities/user';
-
-export type CreateUserDto = {
-  username: string;
-  name: string;
-  email: string;
-  password: string;
-  driver_license: string;
-};
+import { CreateUserDTO } from '../dtos/create-user-dto';
 
 export interface IUsersRepository {
   findUserByEmail(email: string): Promise<User | null | undefined>;
   findUserById(id: string): Promise<User | null | undefined>;
-  create(input: CreateUserDto): Promise<void>;
+  create(input: CreateUserDTO): Promise<void>;
 }
