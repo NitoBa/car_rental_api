@@ -1,11 +1,20 @@
 import { PrismaClient } from '@prisma/client';
 
 import { CreateUserDTO } from '../../application/dtos/create-user-dto';
+import { UpdateUserDTO } from '../../application/dtos/update-user-dto';
 import { IUsersRepository } from '../../application/repositories/iusers-repository';
 import { User } from '../../domain/entities/user';
 
 export class UsersRepositoryPrisma implements IUsersRepository {
   constructor(private prisma: PrismaClient) {}
+  async updateUserAvatar(id: string, avatar: string): Promise<void> {
+    await this.prisma.user.update({
+      where: { id },
+      data: {
+        avatar,
+      },
+    });
+  }
   async findUserByUsername(username: string): Promise<User> {
     const user = await this.prisma.user.findUnique({
       where: { username },
