@@ -13,6 +13,4 @@ ARG PORT=3333
 ENV PORT=$PORT
 EXPOSE $PORT
 
-CMD ["npm", "run", "dev"]
-
 
