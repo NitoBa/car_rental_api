@@ -2,13 +2,15 @@ import { CreateCategoryUsecase } from '../../../../application/usecases/create-c
 import { GetAllCategoriesUsecase } from '../../../../application/usecases/get-all-categories-usecase';
 import { ImportCategoryUsecase } from '../../../../application/usecases/import-category-usecase';
 import { UpdateCategoryUsecase } from '../../../../application/usecases/update-category-usecase';
+import { prisma } from '../../../../external/database/prisma-service';
 import { CategoryRepository } from '../../../../infra/repositories/category-repository';
+import { CategoryRepositoryPrisma } from '../../../../infra/repositories/category-repository-prisma';
 import { CreateCategoryController } from '../../../../presentation/controllers/create-category-controller';
 import { GetAllCategoriesController } from '../../../../presentation/controllers/get-all-categories-controller';
 import { ImportCategory } from '../../../../presentation/controllers/import-category-controller';
 import { UpdateCategoryController } from '../../../../presentation/controllers/update-category-controller';
 
-const repository = new CategoryRepository();
+const repository = new CategoryRepositoryPrisma(prisma);
 
 export const createCategoryController = () => {
   const usecase = new CreateCategoryUsecase(repository);
