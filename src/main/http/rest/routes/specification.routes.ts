@@ -10,9 +10,7 @@ import {
 const specificationRouter = Router();
 
 specificationRouter.post('/', adaptRouter(createSpecificationController()));
-specificationRouter.get('/', (req, res) =>
-  getAllSpecificationsController().handle(req, res)
-);
+specificationRouter.get('/', adaptRouter(getAllSpecificationsController()));
 specificationRouter.get('/:id', (req, res) =>
   getSpecificationByIdController().handle(req, res)
 );

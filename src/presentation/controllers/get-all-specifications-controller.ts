@@ -1,20 +1,19 @@
-import { Request, Response } from 'express';
-
 import { GetAllSpecificationsUsecase } from '../../application/usecases/get-all-specifications-usecase';
+import { badRequest, ok } from '../helpers/http-response-helper';
+import { IController } from '../interfaces/controller';
+import { HttpResponse } from '../interfaces/http-response';
 
-export class GetAllSpecificationsController {
+export class GetAllSpecificationsController implements IController {
   constructor(
     private readonly getAllSpecifications: GetAllSpecificationsUsecase
   ) {}
 
-  async handle(req: Request, res: Response): Promise<Response> {
+  async handle(): Promise<HttpResponse> {
     try {
       const specifications = await this.getAllSpecifications.execute();
-      return res.json(specifications);
+      return ok(specifications);
     } catch (error) {
-      return res.status(400).json({
-        message: error.message || 'Unexpected error.',
-      });
+      return badRequest(error);
     }
   }
 }
