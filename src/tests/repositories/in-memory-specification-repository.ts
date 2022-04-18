@@ -11,8 +11,8 @@ export class InMemorySpecificationRepository
     Object.assign(newSpecification, { name, description });
     this.specifications.push(newSpecification);
   }
-  findAll(): Promise<Specification[]> {
-    throw new Error('Method not implemented.');
+  async findAll(): Promise<Specification[]> {
+    return this.specifications;
   }
   async findByName(name: string): Promise<Specification> {
     return this.specifications.find((spec) => spec.name === name);
