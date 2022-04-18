@@ -10,7 +10,7 @@ const makeSut = () => {
   };
 };
 
-describe('Create Specification Usecase', () => {
+describe('Get All Specifications Usecase', () => {
   it('should return a empty list of specifications if no exists', async () => {
     const { sut } = makeSut();
 

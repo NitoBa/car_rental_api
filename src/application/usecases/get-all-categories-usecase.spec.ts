@@ -11,7 +11,7 @@ const makeSut = () => {
     repository,
   };
 };
-describe('Create Category Usecase', () => {
+describe('Get All Categories Usecase', () => {
   it('should return zero categories if there are no categories', async () => {
     const { sut } = makeSut();
     const categories = await sut.execute();

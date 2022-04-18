@@ -17,7 +17,7 @@ export class InMemorySpecificationRepository
   async findByName(name: string): Promise<Specification> {
     return this.specifications.find((spec) => spec.name === name);
   }
-  findById(id: string): Promise<Specification> {
-    throw new Error('Method not implemented.');
+  async findById(id: string): Promise<Specification> {
+    return this.specifications.find((spec) => spec.id === id);
   }
 }
