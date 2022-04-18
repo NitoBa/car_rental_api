@@ -20,8 +20,8 @@ export class InMemoryCategoryRepository implements ICategoryRepository {
   findById(id: string): Promise<Category> {
     throw new Error('Method not implemented.');
   }
-  findAll(): Promise<Category[]> {
-    throw new Error('Method not implemented.');
+  async findAll(): Promise<Category[]> {
+    return this.categories;
   }
   async findByName(name: string): Promise<Category> {
     return this.categories.find((category) => category.name === name);
