@@ -12,7 +12,7 @@ const makeSut = () => {
 };
 
 describe('Create Category Usecase', () => {
-  it('should not be able to create a category if already exists', () => {
+  it('should not be able to create a category if already exists', async () => {
     const { sut, repository } = makeSut();
     const category: Category = {
       id: 'id',
@@ -29,7 +29,7 @@ describe('Create Category Usecase', () => {
       description: 'description',
     });
 
-    expect(result).rejects.toThrow('Category already exists.');
+    await expect(result).rejects.toThrow('Category already exists.');
   });
 
   it('should be able to create a category', async () => {
