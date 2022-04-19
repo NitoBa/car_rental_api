@@ -3,6 +3,7 @@ import { LoginEmailPasswordUsecase } from '../../../../application/usecases/logi
 import { UpdateUserAvatarUsecase } from '../../../../application/usecases/update-user-avatar-usecase';
 import { prisma } from '../../../../external/database/prisma-service';
 import { EncryptRepositoryBcrypt } from '../../../../infra/repositories/encrypt-repository-bcrypt';
+import { FileSystemRepository } from '../../../../infra/repositories/file-system-repository';
 import { JwtRepository } from '../../../../infra/repositories/jwt-repository';
 import { UsersRepositoryPrisma } from '../../../../infra/repositories/users-repository-prisma';
 import { AuthenticateUserController } from '../../../../presentation/controllers/authenticate-user-controller';
@@ -34,6 +35,7 @@ export const createEnsureAuthenticatedMiddleware = () => {
 };
 
 export const createUpdateUserAvatarController = () => {
-  const usecase = new UpdateUserAvatarUsecase(usersRepository);
+  const repository = new FileSystemRepository();
+  const usecase = new UpdateUserAvatarUsecase(usersRepository, repository);
   return new UpdateUserAvatarController(usecase);
 };

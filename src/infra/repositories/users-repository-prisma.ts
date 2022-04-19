@@ -1,7 +1,6 @@
 import { PrismaClient } from '@prisma/client';
 
 import { CreateUserDTO } from '../../application/dtos/create-user-dto';
-import { UpdateUserDTO } from '../../application/dtos/update-user-dto';
 import { IUsersRepository } from '../../application/repositories/iusers-repository';
 import { User } from '../../domain/entities/user';
 

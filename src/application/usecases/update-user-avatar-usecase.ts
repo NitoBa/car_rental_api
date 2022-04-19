@@ -3,10 +3,14 @@ import { resolve } from 'path';
 
 import { deleteFile } from '../../shared/utils/file';
 import { UpdateUserAvatarDTO } from '../dtos/update-user-avatar-dto';
+import { IFileSystemRepository } from '../repositories/ifilesystem-repository';
 import { IUsersRepository } from '../repositories/iusers-repository';
 
 export class UpdateUserAvatarUsecase {
-  constructor(private usersRepository: IUsersRepository) {}
+  constructor(
+    private usersRepository: IUsersRepository,
+    private fileSystemRepository: IFileSystemRepository
+  ) {}
 
   async execute({ userId, avatar_file }: UpdateUserAvatarDTO): Promise<void> {
     if (!userId || !avatar_file) {
@@ -20,7 +24,9 @@ export class UpdateUserAvatarUsecase {
     }
 
     if (user.avatar) {
-      await deleteFile(resolve('tmp', 'avatar', user.avatar));
+      await this.fileSystemRepository.deleteFile(
+        resolve('tmp', 'avatar', user.avatar)
+      );
     }
 
     await this.usersRepository.updateUserAvatar(userId, avatar_file);

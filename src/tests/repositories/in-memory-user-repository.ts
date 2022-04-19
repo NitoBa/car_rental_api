@@ -10,15 +10,18 @@ export class InMemoryUserRepository implements IUsersRepository {
   async findUserByUsername(username: string): Promise<User> {
     return this.users.find((user) => user.username === username);
   }
-  findUserById(id: string): Promise<User> {
-    throw new Error('Method not implemented.');
+  async findUserById(id: string): Promise<User> {
+    return this.users.find((user) => user.id === id);
   }
   async create(input: CreateUserDTO): Promise<void> {
     const newUser = new User();
     Object.assign(newUser, input);
     this.users.push(newUser);
   }
-  updateUserAvatar(id: string, avatar: string): Promise<void> {
-    throw new Error('Method not implemented.');
+  async updateUserAvatar(id: string, avatar: string): Promise<void> {
+    const user = await this.findUserById(id);
+    const indexUser = this.users.indexOf(user);
+    user.avatar = avatar;
+    this.users[indexUser] = user;
   }
 }
