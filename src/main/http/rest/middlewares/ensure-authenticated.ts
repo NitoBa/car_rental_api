@@ -23,11 +23,11 @@ export class EnsureAuthenticatedMiddleware
 
   async handle(req: EnsureAuthenticatedRequest): Promise<HttpResponse> {
     try {
-      const { authorization } = req.headers;
-
-      if (!authorization) {
+      if (!req.headers.authorization) {
         return unauthorized(new Error('Token not provided'));
       }
+
+      const { authorization } = req.headers;
 
       const [, token] = authorization.split(' ');
 

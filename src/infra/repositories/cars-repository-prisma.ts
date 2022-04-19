@@ -39,9 +39,29 @@ export class CarsRepositoryPrisma implements ICarsRepository {
     return newCar;
   }
   async create(input: CreateCarDTO): Promise<void> {
+    const {
+      name,
+      description,
+      fineAmount,
+      dailyRate,
+      licensePlate,
+      category,
+      brand,
+    } = input;
+
     await this.prisma.car.create({
       data: {
-        ...input,
+        brand,
+        name,
+        description,
+        fineAmount,
+        dailyRate,
+        licensePlate,
+        category: {
+          connect: {
+            name: category,
+          },
+        },
       },
     });
   }
