@@ -1,27 +1,12 @@
 /* eslint-disable max-classes-per-file */
 import { randomUUID } from 'node:crypto';
 
+import { Car } from '../../../domain/entities/car';
 import { Category } from '../../../domain/entities/category';
 import { InMemoryCarsRepository } from '../../../tests/repositories/in-memory-cars-repository';
 import { InMemoryCategoryRepository } from '../../../tests/repositories/in-memory-category-repository';
 import { CreateCarDTO } from '../../dtos/create-car-dto';
 import { CreateCarUseCase } from './create-car-usecase';
-
-export class Car {
-  id: string;
-  name: string;
-  description: string;
-  licensePlate: string;
-  available: boolean;
-  brand: string;
-  category: string;
-  fineAmount: string;
-  dailyRate: string;
-
-  constructor() {
-    this.id = this.id ?? randomUUID();
-  }
-}
 
 const makeSut = () => {
   const carsRepository = new InMemoryCarsRepository();
