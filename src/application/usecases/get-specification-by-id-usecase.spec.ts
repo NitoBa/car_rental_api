@@ -1,6 +1,4 @@
-import { Specification } from '../../domain/entities/specification';
 import { InMemorySpecificationRepository } from '../../tests/repositories/in-memory-specification-repository';
-import { GetAllSpecificationsUsecase } from './get-all-specifications-usecase';
 import { GetSpecificationByIdUsecase } from './get-specification-by-id-usecase';
 
 const makeSut = () => {
