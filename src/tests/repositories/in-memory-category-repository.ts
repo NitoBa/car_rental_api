@@ -11,14 +11,22 @@ export class InMemoryCategoryRepository implements ICategoryRepository {
 
     this.categories.push(newCategory);
   }
-  update(category: UpdateCategoryDTO): Promise<void> {
-    throw new Error('Method not implemented.');
+  async update(category: UpdateCategoryDTO): Promise<void> {
+    const categoryToUpdate = await this.findById(category.id);
+
+    const indexCategory = this.categories.indexOf(categoryToUpdate);
+
+    categoryToUpdate.description = category.description;
+    categoryToUpdate.name = category.name;
+    categoryToUpdate.updatedAt = new Date();
+
+    this.categories[indexCategory] = categoryToUpdate;
   }
   delete(id: string): Promise<void> {
     throw new Error('Method not implemented.');
   }
-  findById(id: string): Promise<Category> {
-    throw new Error('Method not implemented.');
+  async findById(id: string): Promise<Category> {
+    return this.categories.find((category) => category.id === id);
   }
   async findAll(): Promise<Category[]> {
     return this.categories;
