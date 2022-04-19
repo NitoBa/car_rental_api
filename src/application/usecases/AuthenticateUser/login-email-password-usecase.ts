@@ -1,6 +1,6 @@
-import { IEncryptRepository } from '../repositories/iencrypt-repository';
-import { IJwtRepository } from '../repositories/ijwt-repository';
-import { IUsersRepository } from '../repositories/iusers-repository';
+import { IEncryptRepository } from '../../repositories/iencrypt-repository';
+import { IJwtRepository } from '../../repositories/ijwt-repository';
+import { IUsersRepository } from '../../repositories/iusers-repository';
 
 type LoginResponse = {
   token: string;

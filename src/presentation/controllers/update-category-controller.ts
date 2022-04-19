@@ -1,4 +1,4 @@
-import { UpdateCategoryUsecase } from '../../application/usecases/update-category-usecase';
+import { UpdateCategoryUsecase } from '../../application/usecases/updateCategory/update-category-usecase';
 import { badRequest, noContent } from '../helpers/http-response-helper';
 import { IController } from '../interfaces/controller';
 import { HttpResponse } from '../interfaces/http-response';

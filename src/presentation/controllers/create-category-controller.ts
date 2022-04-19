@@ -1,4 +1,4 @@
-import { CreateCategoryUsecase } from '../../application/usecases/create-category-usecase';
+import { CreateCategoryUsecase } from '../../application/usecases/createCategory/create-category-usecase';
 import { badRequest, noContent } from '../helpers/http-response-helper';
 import { IController } from '../interfaces/controller';
 import { HttpResponse } from '../interfaces/http-response';

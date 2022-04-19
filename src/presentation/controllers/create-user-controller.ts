@@ -1,5 +1,5 @@
 import { CreateUserDTO } from '../../application/dtos/create-user-dto';
-import { CreateUserUsecase } from '../../application/usecases/create-user-usecase';
+import { CreateUserUsecase } from '../../application/usecases/createUser/create-user-usecase';
 import { badRequest, created } from '../helpers/http-response-helper';
 import { IController } from '../interfaces/controller';
 import { HttpResponse } from '../interfaces/http-response';

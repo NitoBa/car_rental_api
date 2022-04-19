@@ -1,10 +1,9 @@
 /* eslint-disable no-empty */
 import { resolve } from 'path';
 
-import { deleteFile } from '../../shared/utils/file';
-import { UpdateUserAvatarDTO } from '../dtos/update-user-avatar-dto';
-import { IFileSystemRepository } from '../repositories/ifilesystem-repository';
-import { IUsersRepository } from '../repositories/iusers-repository';
+import { UpdateUserAvatarDTO } from '../../dtos/update-user-avatar-dto';
+import { IFileSystemRepository } from '../../repositories/ifilesystem-repository';
+import { IUsersRepository } from '../../repositories/iusers-repository';
 
 export class UpdateUserAvatarUsecase {
   constructor(

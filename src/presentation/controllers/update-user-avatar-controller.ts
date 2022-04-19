@@ -1,4 +1,4 @@
-import { UpdateUserAvatarUsecase } from '../../application/usecases/update-user-avatar-usecase';
+import { UpdateUserAvatarUsecase } from '../../application/usecases/updateUserAvatar/update-user-avatar-usecase';
 import { badRequest, noContent } from '../helpers/http-response-helper';
 import { IController } from '../interfaces/controller';
 import { HttpResponse } from '../interfaces/http-response';

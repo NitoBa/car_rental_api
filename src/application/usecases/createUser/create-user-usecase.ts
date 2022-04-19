@@ -1,6 +1,6 @@
-import { CreateUserDTO } from '../dtos/create-user-dto';
-import { IEncryptRepository } from '../repositories/iencrypt-repository';
-import { IUsersRepository } from '../repositories/iusers-repository';
+import { CreateUserDTO } from '../../dtos/create-user-dto';
+import { IEncryptRepository } from '../../repositories/iencrypt-repository';
+import { IUsersRepository } from '../../repositories/iusers-repository';
 
 export class CreateUserUsecase {
   constructor(
