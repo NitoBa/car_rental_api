@@ -1,4 +1,4 @@
-import { LoginEmailPasswordUsecase } from '../../application/usecases/login-email-password-usecase';
+import { LoginEmailPasswordUsecase } from '../../application/usecases/AuthenticateUser/login-email-password-usecase';
 import { badRequest, ok } from '../helpers/http-response-helper';
 import { IController } from '../interfaces/controller';
 import { HttpResponse } from '../interfaces/http-response';
