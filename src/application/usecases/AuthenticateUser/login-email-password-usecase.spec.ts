@@ -1,6 +1,6 @@
-import { InMemoryEncryptRepository } from '../../tests/repositories/in-memory-encrytor-repository';
-import { InMemoryJWTRepository } from '../../tests/repositories/in-memory-jwt-repository';
-import { InMemoryUserRepository } from '../../tests/repositories/in-memory-user-repository';
+import { InMemoryEncryptRepository } from '../../../tests/repositories/in-memory-encrytor-repository';
+import { InMemoryJWTRepository } from '../../../tests/repositories/in-memory-jwt-repository';
+import { InMemoryUserRepository } from '../../../tests/repositories/in-memory-user-repository';
 import { LoginEmailPasswordUsecase } from './login-email-password-usecase';
 
 const makeSut = () => {

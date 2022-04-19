@@ -1,6 +1,6 @@
 import { rm } from 'node:fs/promises';
 
-import { ImportCategoryUsecase } from '../../application/usecases/import-category-usecase';
+import { ImportCategoryUsecase } from '../../application/usecases/importCategory/import-category-usecase';
 import { badRequest, ok } from '../helpers/http-response-helper';
 import { IController } from '../interfaces/controller';
 import { HttpResponse } from '../interfaces/http-response';

@@ -1,4 +1,4 @@
-import { CreateSpecificationUsecase } from '../../application/usecases/create-specification-usecase';
+import { CreateSpecificationUsecase } from '../../application/usecases/createSpecification/create-specification-usecase';
 import { badRequest, created } from '../helpers/http-response-helper';
 import { IController } from '../interfaces/controller';
 import { HttpResponse } from '../interfaces/http-response';

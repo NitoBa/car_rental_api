@@ -1,4 +1,4 @@
-import { CreateSpecificationUsecase } from '../../../../application/usecases/create-specification-usecase';
+import { CreateSpecificationUsecase } from '../../../../application/usecases/createSpecification/create-specification-usecase';
 import { GetAllSpecificationsUsecase } from '../../../../application/usecases/get-all-specifications-usecase';
 import { GetSpecificationByIdUsecase } from '../../../../application/usecases/get-specification-by-id-usecase';
 import { prisma } from '../../../../external/database/prisma-service';

@@ -1,7 +1,7 @@
-import { CreateCategoryUsecase } from '../../../../application/usecases/create-category-usecase';
-import { GetAllCategoriesUsecase } from '../../../../application/usecases/get-all-categories-usecase';
-import { ImportCategoryUsecase } from '../../../../application/usecases/import-category-usecase';
-import { UpdateCategoryUsecase } from '../../../../application/usecases/update-category-usecase';
+import { CreateCategoryUsecase } from '../../../../application/usecases/createCategory/create-category-usecase';
+import { GetAllCategoriesUsecase } from '../../../../application/usecases/GetAllCategories/get-all-categories-usecase';
+import { ImportCategoryUsecase } from '../../../../application/usecases/importCategory/import-category-usecase';
+import { UpdateCategoryUsecase } from '../../../../application/usecases/updateCategory/update-category-usecase';
 import { prisma } from '../../../../external/database/prisma-service';
 import { CategoryRepositoryPrisma } from '../../../../infra/repositories/category-repository-prisma';
 import { CreateCategoryController } from '../../../../presentation/controllers/create-category-controller';

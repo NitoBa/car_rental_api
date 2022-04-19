@@ -1,5 +1,5 @@
-import { InMemoryUserRepository } from '../../tests/repositories/in-memory-user-repository';
-import { IFileSystemRepository } from '../repositories/ifilesystem-repository';
+import { InMemoryUserRepository } from '../../../tests/repositories/in-memory-user-repository';
+import { IFileSystemRepository } from '../../repositories/ifilesystem-repository';
 import { UpdateUserAvatarUsecase } from './update-user-avatar-usecase';
 
 class InMemoryFileSystemRepository implements IFileSystemRepository {

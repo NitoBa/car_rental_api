@@ -1,5 +1,5 @@
-import { InMemoryEncryptRepository } from '../../tests/repositories/in-memory-encrytor-repository';
-import { InMemoryUserRepository } from '../../tests/repositories/in-memory-user-repository';
+import { InMemoryEncryptRepository } from '../../../tests/repositories/in-memory-encrytor-repository';
+import { InMemoryUserRepository } from '../../../tests/repositories/in-memory-user-repository';
 import { CreateUserUsecase } from './create-user-usecase';
 
 const makeSut = () => {

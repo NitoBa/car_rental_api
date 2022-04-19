@@ -1,4 +1,4 @@
-import { InMemoryCategoryRepository } from '../../tests/repositories/in-memory-category-repository';
+import { InMemoryCategoryRepository } from '../../../tests/repositories/in-memory-category-repository';
 import { UpdateCategoryUsecase } from './update-category-usecase';
 
 const makeSut = () => {

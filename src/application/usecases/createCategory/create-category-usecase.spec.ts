@@ -1,5 +1,5 @@
-import { Category } from '../../domain/entities/category';
-import { InMemoryCategoryRepository } from '../../tests/repositories/in-memory-category-repository';
+import { Category } from '../../../domain/entities/category';
+import { InMemoryCategoryRepository } from '../../../tests/repositories/in-memory-category-repository';
 import { CreateCategoryUsecase } from './create-category-usecase';
 
 const makeSut = () => {

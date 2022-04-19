@@ -1,7 +1,7 @@
 import { parse } from 'csv-parse';
 import { createReadStream } from 'node:fs';
 
-import { ICategoryRepository } from '../repositories/icategory-repository';
+import { ICategoryRepository } from '../../repositories/icategory-repository';
 
 type ImportCategory = {
   name: string;
