@@ -50,7 +50,7 @@ model Car {
     description  String
     dailyRate    Int
     available    Boolean  @default(true)
-    licensePlate String
+    licensePlate String   @unique
     fineAmount   Int
     brand        String
     categoryId   String
