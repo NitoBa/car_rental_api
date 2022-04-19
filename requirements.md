@@ -62,6 +62,7 @@
   **RN** Regras de negócio:
   - Não deve ser possível cadastrar um novo carro com uma placa já existente.
   - Não deve ser possível alterar a placa de um carro já existente.
+  - Não deve ser possível deve ser possível cadastrar um carro se a categoria não existir.
   - Deve ser cadastrado um novo carro por padrão com disponibilidade.
   - Não deve ser possível cadastrar um novo carro se o usuário não for admin.
 
