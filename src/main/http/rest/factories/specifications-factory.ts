@@ -1,6 +1,6 @@
 import { CreateSpecificationUsecase } from '../../../../application/usecases/createSpecification/create-specification-usecase';
-import { GetAllSpecificationsUsecase } from '../../../../application/usecases/get-all-specifications-usecase';
-import { GetSpecificationByIdUsecase } from '../../../../application/usecases/get-specification-by-id-usecase';
+import { GetAllSpecificationsUsecase } from '../../../../application/usecases/GetAllSpecifications/get-all-specifications-usecase';
+import { GetSpecificationByIdUsecase } from '../../../../application/usecases/GetSpecificationById/get-specification-by-id-usecase';
 import { prisma } from '../../../../external/database/prisma-service';
 import { SpecificationRepositoryPrisma } from '../../../../infra/repositories/specification-repository-prisma';
 import { CreateSpecificationController } from '../../../../presentation/controllers/create-specification-controller';

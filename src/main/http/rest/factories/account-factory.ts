@@ -1,6 +1,6 @@
-import { CreateUserUsecase } from '../../../../application/usecases/create-user-usecase';
-import { LoginEmailPasswordUsecase } from '../../../../application/usecases/login-email-password-usecase';
-import { UpdateUserAvatarUsecase } from '../../../../application/usecases/update-user-avatar-usecase';
+import { LoginEmailPasswordUsecase } from '../../../../application/usecases/AuthenticateUser/login-email-password-usecase';
+import { CreateUserUsecase } from '../../../../application/usecases/createUser/create-user-usecase';
+import { UpdateUserAvatarUsecase } from '../../../../application/usecases/updateUserAvatar/update-user-avatar-usecase';
 import { prisma } from '../../../../external/database/prisma-service';
 import { EncryptRepositoryBcrypt } from '../../../../infra/repositories/encrypt-repository-bcrypt';
 import { FileSystemRepository } from '../../../../infra/repositories/file-system-repository';
