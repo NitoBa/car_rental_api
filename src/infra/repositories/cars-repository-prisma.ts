@@ -3,10 +3,11 @@ import { PrismaClient } from '@prisma/client';
 import { CreateCarDTO } from '../../application/dtos/create-car-dto';
 import { ICarsRepository } from '../../application/repositories/icars-repository';
 import { Car } from '../../domain/entities/car';
+import { CarModel } from '../models/car-model';
 
 export class CarsRepositoryPrisma implements ICarsRepository {
   constructor(private prisma: PrismaClient) {}
-  async findAllAvailable(): Promise<Car[]> {
+  async findAllAvailable(): Promise<CarModel[]> {
     const cars = await this.prisma.car.findMany({
       where: {
         available: true,
@@ -20,26 +21,10 @@ export class CarsRepositoryPrisma implements ICarsRepository {
       },
     });
 
-    return cars.map((car) => {
-      const newCar = new Car();
-
-      Object.assign(newCar, {
-        id: car.id,
-        name: car.name,
-        description: car.description,
-        fineAmount: car.fineAmount,
-        dailyRate: car.dailyRate,
-        licensePlate: car.licensePlate,
-        category: car.category.name,
-        brand: car.brand,
-        available: car.available,
-      });
-
-      return newCar;
-    });
+    return cars.map((car) => CarModel.fromPrisma(car, car.category.name));
   }
 
-  async findByPlate(plate: string): Promise<Car> {
+  async findByPlate(plate: string): Promise<CarModel> {
     const car = await this.prisma.car.findUnique({
       where: {
         licensePlate: plate,
@@ -55,20 +40,7 @@ export class CarsRepositoryPrisma implements ICarsRepository {
 
     if (!car) return null;
 
-    const newCar = new Car();
-
-    Object.assign(newCar, {
-      id: car.id,
-      name: car.name,
-      description: car.description,
-      fineAmount: car.fineAmount,
-      dailyRate: car.dailyRate,
-      licensePlate: car.licensePlate,
-      category: car.category.name,
-      brand: car.brand,
-    });
-
-    return newCar;
+    return CarModel.fromPrisma(car, car.category.name);
   }
   async create(input: CreateCarDTO): Promise<void> {
     const {
