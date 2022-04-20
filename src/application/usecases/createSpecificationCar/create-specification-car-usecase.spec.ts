@@ -1,3 +1,5 @@
+import { randomUUID } from 'node:crypto';
+
 import { Car } from '../../../domain/entities/car';
 import { Specification } from '../../../domain/entities/specification';
 import { InMemoryCarsRepository } from '../../../tests/repositories/in-memory-cars-repository';
@@ -52,6 +54,43 @@ describe('CreateSpecificationCarUsecase', () => {
     await expect(response).rejects.toThrow('Specification not found');
   });
 
+  it('should not be able to create a new specification car if already exists', async () => {
+    const {
+      sut,
+      carsRepository,
+      specificationRepository,
+      specificationsCarsRepository,
+    } = makeSut();
+    const carId = 'car-id';
+    const specificationId = 'specification-id';
+
+    const car = new Car();
+    const spec = new Specification();
+
+    Object.assign(spec, {
+      id: specificationId,
+    });
+    Object.assign(car, {
+      id: carId,
+    });
+
+    carsRepository.cars.push(car);
+    specificationRepository.specifications.push(spec);
+
+    specificationsCarsRepository.specificationsCar.push({
+      id: randomUUID(),
+      carId,
+      specificationId,
+      createdAt: new Date(),
+    });
+
+    const response = sut.execute([specificationId], carId);
+
+    await expect(response).rejects.toThrow(
+      'SpecificationCar to this car already exists'
+    );
+  });
+
   it('should be able to create a new specification car', async () => {
     const {
       sut,
@@ -71,7 +110,6 @@ describe('CreateSpecificationCarUsecase', () => {
 
     Object.assign(car, {
       id: carId,
-      specifications: [spec],
     });
 
     specificationRepository.specifications.push(spec);

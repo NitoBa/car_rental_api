@@ -13,6 +13,15 @@ export type SpecificationCar = {
 export class InMemorySpecificationCarRepository
   implements ISpecificationCarRepository
 {
+  async findBySpecificationIdAndCarId(
+    input: CreateSpecificationCarDTO
+  ): Promise<boolean> {
+    return this.specificationsCar.some(
+      (specificationCar) =>
+        specificationCar.specificationId === input.specificationId &&
+        specificationCar.carId === input.carId
+    );
+  }
   specificationsCar: SpecificationCar[] = [];
   async createSpecificationCar(
     input: CreateSpecificationCarDTO

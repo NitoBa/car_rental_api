@@ -1,5 +1,8 @@
-import { createSpecificationCarDTO } from '../dtos/create-specification-car-dto';
+import { CreateSpecificationCarDTO } from '../dtos/create-specification-car-dto';
 
 export interface ISpecificationCarRepository {
-  createSpecificationCar(input: createSpecificationCarDTO): Promise<void>;
+  createSpecificationCar(input: CreateSpecificationCarDTO): Promise<void>;
+  findBySpecificationIdAndCarId(
+    input: CreateSpecificationCarDTO
+  ): Promise<boolean>;
 }

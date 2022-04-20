@@ -26,6 +26,16 @@ export class CreateSpecificationCarUseCase {
         throw new Error('Specification not found');
       }
 
+      const specificationCar =
+        await this.specificationsCarsRepository.findBySpecificationIdAndCarId({
+          carId,
+          specificationId,
+        });
+
+      if (specificationCar) {
+        throw new Error('SpecificationCar to this car already exists');
+      }
+
       await this.specificationsCarsRepository.createSpecificationCar({
         carId,
         specificationId,
