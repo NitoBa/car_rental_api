@@ -6,6 +6,38 @@ import { Car } from '../../domain/entities/car';
 
 export class CarsRepositoryPrisma implements ICarsRepository {
   constructor(private prisma: PrismaClient) {}
+  async findAllAvailable(): Promise<Car[]> {
+    const cars = await this.prisma.car.findMany({
+      where: {
+        available: true,
+      },
+      include: {
+        category: {
+          select: {
+            name: true,
+          },
+        },
+      },
+    });
+
+    return cars.map((car) => {
+      const newCar = new Car();
+
+      Object.assign(newCar, {
+        id: car.id,
+        name: car.name,
+        description: car.description,
+        fineAmount: car.fineAmount,
+        dailyRate: car.dailyRate,
+        licensePlate: car.licensePlate,
+        category: car.category.name,
+        brand: car.brand,
+        available: car.available,
+      });
+
+      return newCar;
+    });
+  }
 
   async findByPlate(plate: string): Promise<Car> {
     const car = await this.prisma.car.findUnique({
