@@ -18,20 +18,20 @@ describe('UploadCarImageUsecase', () => {
   it('should not be able to upload a car image without params', async () => {
     const { sut } = makeSut();
     const carId = '';
-    const image = '';
-    await expect(sut.execute(carId, image)).rejects.toThrow('Missing params');
+    const images = [];
+    await expect(sut.execute(carId, images)).rejects.toThrow('Missing params');
   });
   it('should not be able to upload a car image to inexistent car', async () => {
     const { sut } = makeSut();
     const carId = 'car-id';
-    const image = 'image-url';
-    await expect(sut.execute(carId, image)).rejects.toThrow('Car not found');
+    const images = ['image-url'];
+    await expect(sut.execute(carId, images)).rejects.toThrow('Car not found');
   });
 
   it('should be able to upload a car image to a car', async () => {
     const { sut, carsRepository, carImageRepository } = makeSut();
     const carId = 'car-id';
-    const image = 'image-url';
+    const images = ['image-url'];
 
     const car = new Car();
 
@@ -41,10 +41,30 @@ describe('UploadCarImageUsecase', () => {
 
     carsRepository.cars.push(car);
 
-    const response = await sut.execute(carId, image);
+    const response = await sut.execute(carId, images);
 
     expect(response).toBeUndefined();
     expect(carImageRepository.carImages.length).toBe(1);
+    expect(carImageRepository.carImages[0].carId).toBe(carId);
+  });
+
+  it('should be able to upload multiples images to a car', async () => {
+    const { sut, carsRepository, carImageRepository } = makeSut();
+    const carId = 'car-id';
+    const images = ['image-url1', 'image-url2', 'image-url3'];
+
+    const car = new Car();
+
+    Object.assign(car, {
+      id: carId,
+    });
+
+    carsRepository.cars.push(car);
+
+    const response = await sut.execute(carId, images);
+
+    expect(response).toBeUndefined();
+    expect(carImageRepository.carImages.length).toBe(3);
     expect(carImageRepository.carImages[0].carId).toBe(carId);
   });
 });

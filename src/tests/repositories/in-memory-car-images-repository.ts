@@ -10,12 +10,14 @@ export type CarImages = {
 export class InMemoryCarImagesRepository implements ICarImageRepository {
   carImages: CarImages[] = [];
 
-  async uploadCarImage(carId: string, image: string): Promise<void> {
-    this.carImages.push({
-      carId,
-      imageUrl: image,
-      createdAt: new Date(),
-      updatedAt: new Date(),
+  async uploadCarImage(carId: string, images: string[]): Promise<void> {
+    images.forEach((image) => {
+      this.carImages.push({
+        carId,
+        imageUrl: image,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      });
     });
   }
 

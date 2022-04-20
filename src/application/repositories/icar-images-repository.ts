@@ -1,3 +1,3 @@
 export interface ICarImageRepository {
-  uploadCarImage(carId: string, image: string): Promise<void>;
+  uploadCarImage(carId: string, images: string[]): Promise<void>;
 }

@@ -4,16 +4,14 @@ import { ICarImageRepository } from '../../application/repositories/icar-images-
 
 export class CarImagesRepository implements ICarImageRepository {
   constructor(private prisma: PrismaClient) {}
-  async uploadCarImage(carId: string, image: string): Promise<void> {
-    this.prisma.carImages.create({
-      data: {
-        car: {
-          connect: {
-            id: carId,
-          },
-        },
-        imageUrl: image,
-      },
+  async uploadCarImage(carId: string, images: string[]): Promise<void> {
+    this.prisma.carImages.createMany({
+      data: images.map((image) => {
+        return {
+          carId,
+          imageUrl: image,
+        };
+      }),
     });
   }
 }
