@@ -5,11 +5,16 @@ import { CategoryRepositoryPrisma } from '../../../../infra/repositories/categor
 import { JwtRepository } from '../../../../infra/repositories/jwt-repository';
 import { UsersRepositoryPrisma } from '../../../../infra/repositories/users-repository-prisma';
 import { CreateCarsController } from '../../../../presentation/controllers/create-cars-controller';
+import { EnsureUserIsAdminMiddleware } from '../middlewares/ensure-user-is-admin';
 
 const carsRepository = new CarsRepositoryPrisma(prisma);
 const categoryRepository = new CategoryRepositoryPrisma(prisma);
-// const usersRepository = new UsersRepositoryPrisma(prisma);
-// const jwtRepository = new JwtRepository();
+const jwtRepository = new JwtRepository();
+const usersRepository = new UsersRepositoryPrisma(prisma);
+
+export const createEnsureUserIsAdminMiddleware = () => {
+  return new EnsureUserIsAdminMiddleware(jwtRepository, usersRepository);
+};
 
 export const createCarsController = () => {
   const usecase = new CreateCarUseCase(carsRepository, categoryRepository);
