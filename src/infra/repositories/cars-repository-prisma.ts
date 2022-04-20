@@ -25,6 +25,8 @@ export class CarsRepositoryPrisma implements ICarsRepository {
       },
     });
 
+    if (!car) return null;
+
     const specifications = car.specificationsCars.map(
       (specification) => specification.specification
     );

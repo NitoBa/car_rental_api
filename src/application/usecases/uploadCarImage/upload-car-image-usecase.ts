@@ -7,8 +7,8 @@ export class UploadCarImageUsecase {
     private readonly carsRepository: ICarsRepository
   ) {}
 
-  async execute(carId: string, image: string[]): Promise<void> {
-    if (!carId || !image) {
+  async execute(carId: string, images: string[]): Promise<void> {
+    if (!carId || images.length === 0) {
       throw new Error('Missing params');
     }
 
@@ -17,6 +17,6 @@ export class UploadCarImageUsecase {
     if (!carExists) {
       throw new Error('Car not found');
     }
-    await this.carImageRepository.uploadCarImage(carId, image);
+    await this.carImageRepository.uploadCarImage(carId, images);
   }
 }
