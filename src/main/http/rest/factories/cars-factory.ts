@@ -6,7 +6,7 @@ import { CategoryRepositoryPrisma } from '../../../../infra/repositories/categor
 import { JwtRepository } from '../../../../infra/repositories/jwt-repository';
 import { UsersRepositoryPrisma } from '../../../../infra/repositories/users-repository-prisma';
 import { CreateCarsController } from '../../../../presentation/controllers/create-cars-controller';
-import { GetAllAvailableCarsController } from '../../../../presentation/controllers/get-all-available-cars.controller';
+import { GetAllAvailableCarsController } from '../../../../presentation/controllers/get-all-available-cars-controller';
 import { EnsureUserIsAdminMiddleware } from '../middlewares/ensure-user-is-admin';
 
 const carsRepository = new CarsRepositoryPrisma(prisma);

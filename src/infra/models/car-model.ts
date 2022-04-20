@@ -1,6 +1,7 @@
 import { Car as CarPrisma } from '@prisma/client/';
 
 import { Car } from '../../domain/entities/car';
+import { Specification } from '../../domain/entities/specification';
 
 export class CarModel extends Car {
   id: string;
@@ -10,6 +11,7 @@ export class CarModel extends Car {
   available: boolean;
   brand: string;
   category: string;
+  specifications?: Specification[];
   fineAmount: string;
   dailyRate: string;
 
@@ -17,8 +19,14 @@ export class CarModel extends Car {
     super();
   }
 
-  static fromPrisma(car: CarPrisma, categoryName: string) {
+  static fromPrisma(
+    car: CarPrisma,
+    categoryName: string,
+    specification: Specification[]
+  ) {
     const newCar = new CarModel();
+
+    newCar.specifications = specification;
 
     Object.assign(newCar, {
       id: car.id,
