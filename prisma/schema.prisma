@@ -19,14 +19,17 @@ model Category {
 }
 
 model Specification {
-    id          String   @id @default(uuid())
-    name        String
-    description String
-    createdAt   DateTime @default(now())
-    updatedAt   DateTime @updatedAt
+    id                 String               @id @default(uuid())
+    name               String
+    description        String
+    createdAt          DateTime             @default(now())
+    updatedAt          DateTime             @updatedAt
+    specificationsCars SpecificationsCars[]
 
 
     @@map("specifications")
+    Car   Car?    @relation(fields: [carId], references: [id])
+    carId String?
 }
 
 model User {
@@ -45,18 +48,28 @@ model User {
 }
 
 model Car {
-    id           String   @id @default(uuid())
-    name         String
-    description  String
-    dailyRate    Int
-    available    Boolean  @default(true)
-    licensePlate String   @unique
-    fineAmount   Int
-    brand        String
-    categoryId   String
-    category     Category @relation(fields: [categoryId], references: [id])
-    createdAt    DateTime @default(now())
-    updatedAt    DateTime @updatedAt
+    id                 String               @id @default(uuid())
+    name               String
+    description        String
+    dailyRate          Int
+    available          Boolean              @default(true)
+    licensePlate       String               @unique
+    fineAmount         Int
+    brand              String
+    categoryId         String
+    category           Category             @relation(fields: [categoryId], references: [id])
+    specifications     Specification[]
+    createdAt          DateTime             @default(now())
+    updatedAt          DateTime             @updatedAt
+    specificationsCars SpecificationsCars[]
 
     @@map("cars")
+}
+
+model SpecificationsCars {
+    carId           String        @unique
+    specificationId String        @unique
+    car             Car           @relation(fields: [carId], references: [id])
+    specification   Specification @relation(fields: [specificationId], references: [id])
+    createdAt       DateTime      @default(now())
 }
