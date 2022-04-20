@@ -71,6 +71,8 @@ model SpecificationsCars {
     car             Car           @relation(fields: [carId], references: [id])
     specification   Specification @relation(fields: [specificationId], references: [id])
     createdAt       DateTime      @default(now())
+
+    @@map("specifications_cars")
 }
 
 model CarImages {
