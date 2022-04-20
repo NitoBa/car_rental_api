@@ -8,7 +8,7 @@ type UploadCarImageRequest = {
     id: string;
   };
   body: {
-    image: string[];
+    images: string[];
   };
 };
 
@@ -19,8 +19,13 @@ export class UploadCarImagesController
   async handle(request: UploadCarImageRequest): Promise<HttpResponse> {
     try {
       const { id } = request.params;
-      const { image } = request.body;
-      await this.uploadCarImageUsecase.execute(id, image);
+      const { images } = request.body;
+      await this.uploadCarImageUsecase.execute(id, images);
+
+      if (images.length > 1) {
+        return created('Car images uploaded');
+      }
+
       return created('Car image uploaded');
     } catch (error) {
       return badRequest(error);
