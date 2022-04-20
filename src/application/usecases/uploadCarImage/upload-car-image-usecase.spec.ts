@@ -15,6 +15,12 @@ const makeSut = () => {
 };
 
 describe('UploadCarImageUsecase', () => {
+  it('should not be able to upload a car image without params', async () => {
+    const { sut } = makeSut();
+    const carId = '';
+    const image = '';
+    await expect(sut.execute(carId, image)).rejects.toThrow('Missing params');
+  });
   it('should not be able to upload a car image to inexistent car', async () => {
     const { sut } = makeSut();
     const carId = 'car-id';

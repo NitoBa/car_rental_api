@@ -8,6 +8,10 @@ export class UploadCarImageUsecase {
   ) {}
 
   async execute(carId: string, image: string): Promise<void> {
+    if (!carId || !image) {
+      throw new Error('Missing params');
+    }
+
     const carExists = await this.carsRepository.findById(carId);
 
     if (!carExists) {
