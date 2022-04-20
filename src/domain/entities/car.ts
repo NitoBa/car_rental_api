@@ -1,5 +1,7 @@
 import { randomUUID } from 'node:crypto';
 
+import { Specification } from './specification';
+
 export class Car {
   id: string;
   name: string;
@@ -8,6 +10,7 @@ export class Car {
   available: boolean;
   brand: string;
   category: string;
+  specifications?: Specification[];
   fineAmount: string;
   dailyRate: string;
 
