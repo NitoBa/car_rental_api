@@ -2,7 +2,6 @@ import { PrismaClient } from '@prisma/client';
 
 import { CreateCarDTO } from '../../application/dtos/create-car-dto';
 import { ICarsRepository } from '../../application/repositories/icars-repository';
-import { Car } from '../../domain/entities/car';
 import { CarModel } from '../models/car-model';
 
 export class CarsRepositoryPrisma implements ICarsRepository {
