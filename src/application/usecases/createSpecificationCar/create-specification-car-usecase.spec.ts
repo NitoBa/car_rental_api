@@ -2,20 +2,24 @@ import { Car } from '../../../domain/entities/car';
 import { Specification } from '../../../domain/entities/specification';
 import { InMemoryCarsRepository } from '../../../tests/repositories/in-memory-cars-repository';
 import { InMemorySpecificationRepository } from '../../../tests/repositories/in-memory-specification-repository';
+import { InMemorySpecificationCarRepository } from '../../../tests/repositories/in-memory-specifications-car-repository';
 import { CreateSpecificationCarUseCase } from './create-specification-car-usecase';
 
 const makeSut = () => {
   const specificationRepository = new InMemorySpecificationRepository();
   const carsRepository = new InMemoryCarsRepository();
+  const specificationsCarsRepository = new InMemorySpecificationCarRepository();
   const sut = new CreateSpecificationCarUseCase(
     specificationRepository,
-    carsRepository
+    carsRepository,
+    specificationsCarsRepository
   );
 
   return {
     sut,
     specificationRepository,
     carsRepository,
+    specificationsCarsRepository,
   };
 };
 
@@ -49,7 +53,12 @@ describe('CreateSpecificationCarUsecase', () => {
   });
 
   it('should be able to create a new specification car', async () => {
-    const { sut, carsRepository, specificationRepository } = makeSut();
+    const {
+      sut,
+      carsRepository,
+      specificationRepository,
+      specificationsCarsRepository,
+    } = makeSut();
     const carId = 'car-id';
     const specificationId = 'specification-id';
 
@@ -71,6 +80,6 @@ describe('CreateSpecificationCarUsecase', () => {
     const response = await sut.execute([specificationId], carId);
 
     expect(response).toBeUndefined();
-    expect(carsRepository.cars[0].specifications[0].id).toBe(specificationId);
+    expect(specificationsCarsRepository.specificationsCar).toHaveLength(1);
   });
 });

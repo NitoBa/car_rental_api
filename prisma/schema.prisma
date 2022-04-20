@@ -24,12 +24,10 @@ model Specification {
     description        String
     createdAt          DateTime             @default(now())
     updatedAt          DateTime             @updatedAt
-    specificationsCars SpecificationsCars[]
+    SpecificationsCars SpecificationsCars[]
 
 
     @@map("specifications")
-    Car   Car?    @relation(fields: [carId], references: [id])
-    carId String?
 }
 
 model User {
@@ -58,7 +56,6 @@ model Car {
     brand              String
     categoryId         String
     category           Category             @relation(fields: [categoryId], references: [id])
-    specifications     Specification[]
     createdAt          DateTime             @default(now())
     updatedAt          DateTime             @updatedAt
     specificationsCars SpecificationsCars[]
@@ -67,8 +64,9 @@ model Car {
 }
 
 model SpecificationsCars {
-    carId           String        @unique
-    specificationId String        @unique
+    id              String        @id @default(uuid())
+    carId           String
+    specificationId String
     car             Car           @relation(fields: [carId], references: [id])
     specification   Specification @relation(fields: [specificationId], references: [id])
     createdAt       DateTime      @default(now())

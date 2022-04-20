@@ -1,7 +1,6 @@
 import { PrismaClient } from '@prisma/client';
 
 import { CreateCarDTO } from '../../application/dtos/create-car-dto';
-import { UpdateSpecificationCarDTO } from '../../application/dtos/update-specification-car-dto';
 import { ICarsRepository } from '../../application/repositories/icars-repository';
 import { CarModel } from '../models/car-model';
 
@@ -18,54 +17,32 @@ export class CarsRepositoryPrisma implements ICarsRepository {
             name: true,
           },
         },
-        specifications: true,
-      },
-    });
-
-    return CarModel.fromPrisma(car, car.category.name, car.specifications);
-  }
-  async updateSpecification(input: UpdateSpecificationCarDTO): Promise<void> {
-    const { carId, specificationId } = input;
-
-    // const specification = await this.prisma.specification.findUnique({
-    //   where: {
-    //     id: specificationId,
-    //   },
-    // });
-
-    await this.prisma.car.update({
-      where: {
-        id: carId,
-      },
-      data: {
         specificationsCars: {
-          connectOrCreate: {
-            where: {
-              specificationId,
-            },
-            create: {
-              specification: {
-                connect: {
-                  id: specificationId,
-                },
-              },
-            },
+          include: {
+            specification: true,
           },
         },
       },
     });
 
-    // await this.prisma.specificationsCars.create({
-    //   data: {},
-    // });
+    const specifications = car.specificationsCars.map(
+      (specification) => specification.specification
+    );
+
+    return CarModel.fromPrisma(car, car.category.name, specifications);
   }
+
   async findAllAvailable(): Promise<CarModel[]> {
     const cars = await this.prisma.car.findMany({
       where: {
         available: true,
       },
       include: {
-        specifications: true,
+        specificationsCars: {
+          include: {
+            specification: true,
+          },
+        },
         category: {
           select: {
             name: true,
@@ -74,9 +51,13 @@ export class CarsRepositoryPrisma implements ICarsRepository {
       },
     });
 
-    return cars.map((car) =>
-      CarModel.fromPrisma(car, car.category.name, car.specifications)
-    );
+    return cars.map((car) => {
+      const specifications = car.specificationsCars.map(
+        (specification) => specification.specification
+      );
+
+      return CarModel.fromPrisma(car, car.category.name, specifications);
+    });
   }
 
   async findByPlate(plate: string): Promise<CarModel> {
@@ -85,7 +66,11 @@ export class CarsRepositoryPrisma implements ICarsRepository {
         licensePlate: plate,
       },
       include: {
-        specifications: true,
+        specificationsCars: {
+          include: {
+            specification: true,
+          },
+        },
         category: {
           select: {
             name: true,
@@ -96,7 +81,11 @@ export class CarsRepositoryPrisma implements ICarsRepository {
 
     if (!car) return null;
 
-    return CarModel.fromPrisma(car, car.category.name, car.specifications);
+    const specifications = car.specificationsCars.map(
+      (specification) => specification.specification
+    );
+
+    return CarModel.fromPrisma(car, car.category.name, specifications);
   }
   async create(input: CreateCarDTO): Promise<void> {
     const {

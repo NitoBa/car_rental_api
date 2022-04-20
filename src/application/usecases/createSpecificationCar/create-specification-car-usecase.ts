@@ -1,11 +1,13 @@
 /* eslint-disable no-restricted-syntax */
 import { ICarsRepository } from '../../repositories/icars-repository';
+import { ISpecificationCarRepository } from '../../repositories/ispecifications-car-repository';
 import { ISpecificationRepository } from '../../repositories/ispecifications-repository';
 
 export class CreateSpecificationCarUseCase {
   constructor(
     private readonly specificationRepository: ISpecificationRepository,
-    private readonly carsRepository: ICarsRepository
+    private readonly carsRepository: ICarsRepository,
+    private readonly specificationsCarsRepository: ISpecificationCarRepository
   ) {}
 
   async execute(specificationsId: string[], carId: string): Promise<void> {
@@ -24,11 +26,9 @@ export class CreateSpecificationCarUseCase {
         throw new Error('Specification not found');
       }
 
-      await this.carsRepository.updateSpecification({
+      await this.specificationsCarsRepository.createSpecificationCar({
         carId,
         specificationId,
-        name: specification.name,
-        description: specification.description,
       });
     }
   }

@@ -2,6 +2,7 @@ import { Router } from 'express';
 
 import { adaptRouter } from '../adapters/express-router-adapter';
 import {
+  createSpecificationCarController,
   createSpecificationController,
   getAllSpecificationsController,
   getSpecificationByIdController,
@@ -10,6 +11,10 @@ import {
 const specificationRouter = Router();
 
 specificationRouter.post('/', adaptRouter(createSpecificationController()));
+specificationRouter.post(
+  '/car',
+  adaptRouter(createSpecificationCarController())
+);
 specificationRouter.get('/', adaptRouter(getAllSpecificationsController()));
 specificationRouter.get('/:id', adaptRouter(getSpecificationByIdController()));
 
