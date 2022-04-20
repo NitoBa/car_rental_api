@@ -5,6 +5,7 @@ import { GetSpecificationByIdUsecase } from '../../../../application/usecases/Ge
 import { prisma } from '../../../../external/database/prisma-service';
 import { CarsRepositoryPrisma } from '../../../../infra/repositories/cars-repository-prisma';
 import { SpecificationRepositoryPrisma } from '../../../../infra/repositories/specification-repository-prisma';
+import { SpecificationsCarsRepository } from '../../../../infra/repositories/specifications-car-repository';
 import { CreateSpecificationCarController } from '../../../../presentation/controllers/create-specification-car-controller';
 import { CreateSpecificationController } from '../../../../presentation/controllers/create-specification-controller';
 import { GetAllSpecificationsController } from '../../../../presentation/controllers/get-all-specifications-controller';
@@ -29,6 +30,11 @@ export const getSpecificationByIdController = () => {
 };
 
 export const createSpecificationCarController = () => {
-  const usecase = new CreateSpecificationCarUseCase(repository, carRepository);
+  const specificationCarRepository = new SpecificationsCarsRepository(prisma);
+  const usecase = new CreateSpecificationCarUseCase(
+    repository,
+    carRepository,
+    specificationCarRepository
+  );
   return new CreateSpecificationCarController(usecase);
 };
