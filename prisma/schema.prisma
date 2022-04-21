@@ -41,6 +41,7 @@ model User {
     driver_license String
     createdAt      DateTime @default(now())
     updatedAt      DateTime @updatedAt
+    Rental         Rental[]
 
     @@map("users")
 }
@@ -60,6 +61,7 @@ model Car {
     updatedAt          DateTime             @updatedAt
     specificationsCars SpecificationsCars[]
     CarImages          CarImages[]
+    Rental             Rental[]
 
     @@map("cars")
 }
@@ -84,4 +86,20 @@ model CarImages {
     updatedAt DateTime @updatedAt
 
     @@map("car_images")
+}
+
+model Rental {
+    id               String    @id @default(uuid())
+    carId            String
+    userId           String
+    startDate        DateTime
+    endDate          DateTime?
+    expectReturnDate DateTime
+    total            Int?
+    createdAt        DateTime  @default(now())
+    updatedAt        DateTime  @updatedAt
+    car              Car       @relation(fields: [carId], references: [id])
+    user             User      @relation(fields: [userId], references: [id])
+
+    @@map("rentals")
 }
