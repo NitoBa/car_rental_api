@@ -6,4 +6,5 @@ export interface ICarsRepository {
   findById(id: string): Promise<CarModel | undefined>;
   create(input: CreateCarDTO): Promise<void>;
   findAllAvailable(): Promise<CarModel[]>;
+  updateAvailableStatus(status: boolean, carId: string): Promise<void>;
 }

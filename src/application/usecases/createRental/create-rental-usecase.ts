@@ -58,6 +58,8 @@ export class CreateRentalUsecase {
       expectReturnDate,
     });
 
+    await this.carsRepository.updateAvailableStatus(false, carId);
+
     return rental;
   }
 }

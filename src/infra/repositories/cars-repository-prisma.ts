@@ -6,6 +6,16 @@ import { CarModel } from '../models/car-model';
 
 export class CarsRepositoryPrisma implements ICarsRepository {
   constructor(private prisma: PrismaClient) {}
+  async updateAvailableStatus(status: boolean, carId: string): Promise<void> {
+    await this.prisma.car.update({
+      where: {
+        id: carId,
+      },
+      data: {
+        available: status,
+      },
+    });
+  }
   async findById(id: string): Promise<CarModel> {
     const car = await this.prisma.car.findUnique({
       where: {

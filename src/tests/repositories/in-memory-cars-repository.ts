@@ -1,11 +1,18 @@
 import { CreateCarDTO } from '../../application/dtos/create-car-dto';
-import { CreateSpecificationCarDTO } from '../../application/dtos/create-specification-car-dto';
+import { UpdateSpecificationCarDTO } from '../../application/dtos/update-specification-car-dto';
 import { ICarsRepository } from '../../application/repositories/icars-repository';
 import { Car } from '../../domain/entities/car';
 
 export class InMemoryCarsRepository implements ICarsRepository {
   cars: Car[] = [];
-  async updateSpecification(input: CreateSpecificationCarDTO): Promise<void> {
+
+  async updateAvailableStatus(status: boolean, carId: string): Promise<void> {
+    const car = this.cars.find((car) => car.id === carId);
+    const carIndex = this.cars.indexOf(car);
+    car.available = status;
+    this.cars[carIndex] = car;
+  }
+  async updateSpecification(input: UpdateSpecificationCarDTO): Promise<void> {
     const car = await this.findById(input.carId);
     const carIndex = this.cars.indexOf(car);
 
@@ -34,7 +41,6 @@ export class InMemoryCarsRepository implements ICarsRepository {
 
     this.cars.push(car);
   }
-
   async findByPlate(plate: string): Promise<Car> {
     return this.cars.find((car) => car.licensePlate === plate);
   }
