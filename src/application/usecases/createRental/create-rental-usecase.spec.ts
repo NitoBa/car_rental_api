@@ -2,18 +2,22 @@ import { Car } from '../../../domain/entities/car';
 import { Rental } from '../../../domain/entities/rental';
 import { User } from '../../../domain/entities/user';
 import { InMemoryCarsRepository } from '../../../tests/repositories/in-memory-cars-repository';
+import { InMemoryHandleDateRepository } from '../../../tests/repositories/in-memory-handle-date-repository';
 import { InMemoryRentalRepository } from '../../../tests/repositories/in-memory-rental-repository';
 import { InMemoryUserRepository } from '../../../tests/repositories/in-memory-user-repository';
 import { CreateRentalUsecase } from './create-rental-usecase';
 
 const makeSutWithDefaultValues = () => {
+  const handleDateRepository = new InMemoryHandleDateRepository();
+
   const userRepository = new InMemoryUserRepository();
   const carsRepository = new InMemoryCarsRepository();
   const rentalRepository = new InMemoryRentalRepository();
   const sut = new CreateRentalUsecase(
     rentalRepository,
     carsRepository,
-    userRepository
+    userRepository,
+    handleDateRepository
   );
   const car = new Car();
   const user = new User();
@@ -36,23 +40,27 @@ const makeSutWithDefaultValues = () => {
     userRepository,
     carsRepository,
     rentalRepository,
+    handleDateRepository,
   };
 };
 
 const makeSut = () => {
+  const handleDateRepository = new InMemoryHandleDateRepository();
   const userRepository = new InMemoryUserRepository();
   const carsRepository = new InMemoryCarsRepository();
   const rentalRepository = new InMemoryRentalRepository();
   const sut = new CreateRentalUsecase(
     rentalRepository,
     carsRepository,
-    userRepository
+    userRepository,
+    handleDateRepository
   );
 
   return {
     sut,
     userRepository,
     carsRepository,
+    handleDateRepository,
   };
 };
 
@@ -176,16 +184,29 @@ describe('CreateRentalUsecase', () => {
     );
   });
 
-  it('Should able to create a new rental', async () => {
+  it('Should not able to create a new rental if expected date more than 24 hours', async () => {
     const { sut } = makeSutWithDefaultValues();
 
+    const date = new Date(new Date().getTime() + 1000 * 60 * 60 * 72);
+
+    const rental = sut.execute({
+      userId: 'user-id',
+      carId: 'car-id',
+      expectReturnDate: date,
+    });
+
+    await expect(rental).rejects.toThrow(
+      'The expected return date must be at least 24 hours from now'
+    );
+  });
+
+  it('Should able to create a new rental', async () => {
+    const { sut } = makeSutWithDefaultValues();
     const rental = await sut.execute({
       userId: 'user-id',
       carId: 'car-id',
       expectReturnDate: new Date(),
     });
-
-    console.log(rental);
 
     expect(rental).toBeTruthy();
     expect(rental).toHaveProperty('id');

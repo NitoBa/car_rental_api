@@ -1,5 +1,6 @@
 import { Rental } from '../../../domain/entities/rental';
 import { CreateRentalDTO } from '../../dtos/create-rental-dto';
+import { IHandleDateRepository } from '../../repositories/handle-date-repository';
 import { ICarsRepository } from '../../repositories/icars-repository';
 import { IRentalRepository } from '../../repositories/irental-repository';
 import { IUsersRepository } from '../../repositories/iusers-repository';
@@ -8,7 +9,8 @@ export class CreateRentalUsecase {
   constructor(
     private readonly rentalRepository: IRentalRepository,
     private readonly carsRepository: ICarsRepository,
-    private readonly usersRepository: IUsersRepository
+    private readonly usersRepository: IUsersRepository,
+    private readonly handleDate: IHandleDateRepository
   ) {}
 
   async execute(input: CreateRentalDTO): Promise<Rental> {
@@ -49,6 +51,15 @@ export class CreateRentalUsecase {
     if (carUnavailable) {
       throw new Error(
         `The Car with this id: ${carId} already has an open rental`
+      );
+    }
+
+    const isMoreThan24Hours =
+      this.handleDate.isMoreThan24Hours(expectReturnDate);
+
+    if (isMoreThan24Hours) {
+      throw new Error(
+        `The expected return date must be at least 24 hours from now`
       );
     }
 
