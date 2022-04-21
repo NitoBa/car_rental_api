@@ -4,6 +4,9 @@ import { IController } from '../interfaces/controller';
 import { HttpResponse } from '../interfaces/http-response';
 
 type CreateRentalRequest = {
+  headers: {
+    userId: string;
+  };
   body: {
     userId: string;
     carId: string;
@@ -17,7 +20,9 @@ export class CreateRentalController
   constructor(private readonly createRentalUsecase: CreateRentalUsecase) {}
   async handle(request: CreateRentalRequest): Promise<HttpResponse> {
     try {
-      const { userId, carId, expectReturnDate } = request.body;
+      const { userId } = request.headers;
+
+      const { carId, expectReturnDate } = request.body;
       const rental = await this.createRentalUsecase.execute({
         userId,
         carId,
