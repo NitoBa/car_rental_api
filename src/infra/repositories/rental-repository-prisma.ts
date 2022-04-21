@@ -13,7 +13,7 @@ export class RentalRepositoryPrisma implements IRentalRepository {
         userId: rentalInput.userId,
         carId: rentalInput.carId,
         startDate: new Date(),
-        expectReturnDate: rentalInput.expectReturnDate,
+        expectReturnDate: new Date(rentalInput.expectReturnDate),
       },
     });
 
@@ -25,7 +25,7 @@ export class RentalRepositoryPrisma implements IRentalRepository {
         AND: {
           userId,
           endDate: {
-            not: null,
+            equals: null,
           },
         },
       },
@@ -39,7 +39,7 @@ export class RentalRepositoryPrisma implements IRentalRepository {
         AND: {
           carId,
           endDate: {
-            not: null,
+            equals: null,
           },
         },
       },
