@@ -11,6 +11,10 @@ export class CreateRentalUsecase {
   ) {}
 
   async execute(input: CreateRentalDTO): Promise<void> {
-    console.log('');
+    const { carId, userId, expectReturnDate, startDate } = input;
+
+    if (!carId || !userId || !expectReturnDate || !startDate) {
+      throw new Error('Missing parameters');
+    }
   }
 }

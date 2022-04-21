@@ -19,3 +19,18 @@ const makeSut = () => {
     carsRepository,
   };
 };
+
+describe('CreateRentalUsecase', () => {
+  it('Should not be able to create a new rental without parameters', async () => {
+    const { sut } = makeSut();
+
+    const rental = sut.execute({
+      userId: '',
+      carId: '',
+      startDate: undefined,
+      expectReturnDate: undefined,
+    });
+
+    await expect(rental).rejects.toThrow('Missing parameters');
+  });
+});
