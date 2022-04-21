@@ -77,6 +77,10 @@ describe('Create Category Controller', () => {
     await deleteCategory();
   });
 
+  afterAll(async () => {
+    await prisma.$disconnect();
+  });
+
   it('should return 401 if token not provided', async () => {
     const response = await request(app).post('/categories/').send({
       name: 'category',
