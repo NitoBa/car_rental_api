@@ -6,6 +6,7 @@
   "scripts": {
     "test": "jest --config ./jest.config.ts",
     "test:integration": "dotenv -e .env.test jest",
+    "test:integration:watch": "dotenv -e .env.test jest --watch",
     "test:watch": "jest --watch",
     "dev": "tsnd --respawn --ignore-watch node_modules --exit-child src/main/http/rest/server.ts"
   },
