@@ -3,6 +3,7 @@ import { Router } from 'express';
 import { accountRouter } from './account.routes';
 import { carsRouter } from './cars.routes';
 import { categoryRouter } from './categories.routes';
+import { rentalRouter } from './rental.routes';
 import { specificationRouter } from './specification.routes';
 
 const appRouter = Router();
@@ -13,5 +14,6 @@ appRouter.use('/categories', categoryRouter);
 appRouter.use('/specifications', specificationRouter);
 appRouter.use('/account', accountRouter);
 appRouter.use('/cars', carsRouter);
+appRouter.use('/rental', rentalRouter);
 
 export { appRouter };
