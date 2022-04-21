@@ -4,7 +4,7 @@ import { ImportCategoryUsecase } from '../../../../application/usecases/importCa
 import { UpdateCategoryUsecase } from '../../../../application/usecases/updateCategory/update-category-usecase';
 import { prisma } from '../../../../external/database/prisma-service';
 import { CategoryRepositoryPrisma } from '../../../../infra/repositories/category-repository-prisma';
-import { CreateCategoryController } from '../../../../presentation/controllers/create-category-controller';
+import { CreateCategoryController } from '../../../../presentation/controllers/createCategory/create-category-controller';
 import { GetAllCategoriesController } from '../../../../presentation/controllers/get-all-categories-controller';
 import { ImportCategory } from '../../../../presentation/controllers/import-category-controller';
 import { UpdateCategoryController } from '../../../../presentation/controllers/update-category-controller';
