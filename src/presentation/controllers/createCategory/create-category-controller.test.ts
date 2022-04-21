@@ -71,12 +71,12 @@ const createCategory = async () => {
   });
 };
 
-afterEach(async () => {
-  await deleteUser();
-  await deleteCategory();
-});
-
 describe('Create Category Controller', () => {
+  afterEach(async () => {
+    await deleteUser();
+    await deleteCategory();
+  });
+
   it('should return 401 if token not provided', async () => {
     const response = await request(app).post('/categories/').send({
       name: 'category',
