@@ -56,7 +56,11 @@ export class DevolutionRentalUsecase {
       // Não aplicar multa de atraso
       totalPrice = Number(car.dailyRate) * rentalDays;
     }
-    await this.rentalsRepository.updateStatues(rentalId, new Date());
+    await this.rentalsRepository.updateStatues(
+      rentalId,
+      new Date(),
+      totalPrice
+    );
     await this.carsRepository.updateAvailableStatus(true, car.id);
 
     return {

@@ -15,13 +15,18 @@ export class RentalRepositoryPrisma implements IRentalRepository {
 
     return rentals;
   }
-  async updateStatues(rentalId: string, endDate: Date): Promise<void> {
+  async updateStatues(
+    rentalId: string,
+    endDate: Date,
+    totalPrice: number
+  ): Promise<void> {
     await this.prisma.rental.update({
       where: {
         id: rentalId,
       },
       data: {
         endDate,
+        total: totalPrice,
       },
     });
   }

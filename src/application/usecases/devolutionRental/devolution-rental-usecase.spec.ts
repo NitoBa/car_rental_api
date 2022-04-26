@@ -222,4 +222,41 @@ describe('DevolutionRentalUsecase', () => {
 
     expect(carsRepository.cars[0].available).toBe(true);
   });
+
+  it('should be able to set end date when devolution a rental happen', async () => {
+    const { sut, rentalRepository, carsRepository } = makeSut();
+
+    const car = new Car();
+    car.id = 'car-id';
+    car.dailyRate = '100';
+    car.fineAmount = '10';
+
+    carsRepository.cars.push(car);
+
+    const rental = new Rental();
+
+    const startDate = new Date();
+    startDate.setDate(startDate.getDate());
+
+    const expectReturnDate = new Date();
+    expectReturnDate.setDate(expectReturnDate.getDate() + 5);
+
+    Object.assign(rental, {
+      id: 'rental-id',
+      userId: 'user-id',
+      carId: 'car-id',
+      startDate,
+      expectReturnDate,
+    });
+
+    rentalRepository.rentals.push(rental);
+
+    await sut.execute({
+      rentalId: 'rental-id',
+      userId: 'user-id',
+    });
+
+    expect(rentalRepository.rentals[0].total).toBe(100);
+    expect(rentalRepository.rentals[0].endDate).not.toBeNull();
+  });
 });

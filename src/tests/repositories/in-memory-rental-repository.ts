@@ -9,7 +9,11 @@ export class InMemoryRentalRepository implements IRentalRepository {
   async findAllByUserId(id: string): Promise<Rental[]> {
     return this.rentals.filter((rental) => id === rental.userId);
   }
-  async updateStatues(rentalId: string, endDate: Date): Promise<void> {
+  async updateStatues(
+    rentalId: string,
+    endDate: Date,
+    totalPrice: number
+  ): Promise<void> {
     const rental = await this.findById(rentalId);
 
     if (!rental) {
@@ -17,6 +21,7 @@ export class InMemoryRentalRepository implements IRentalRepository {
     }
 
     rental.endDate = endDate;
+    rental.total = totalPrice;
 
     const indexRental = this.rentals.indexOf(rental);
     this.rentals[indexRental] = rental;
