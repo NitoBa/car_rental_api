@@ -6,6 +6,9 @@ import { Rental } from '../../domain/entities/rental';
 
 export class InMemoryRentalRepository implements IRentalRepository {
   rentals: Rental[] = [];
+  async findAllByUserId(id: string): Promise<Rental[]> {
+    return this.rentals.filter((rental) => id === rental.userId);
+  }
   async updateStatues(rentalId: string, endDate: Date): Promise<void> {
     const rental = await this.findById(rentalId);
 
