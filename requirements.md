@@ -129,4 +129,18 @@
   - O aluguel de um carro deve ter duracão mínima de 24 horas
   
   
-  
+# Devolucao de um carro
+  **RF** Requisitos funcionais:
+  - Deve ser possível realizar a devolucao de um carro
+
+  **RNF** Requisitos não funcionais:
+
+  **RN** Regras de negócio:
+  - Não deve ser possível realizar a devolucao de um carro para um usuário não autenticado
+  - Não deve ser possível realizar a devolucao de um carro se não existir um aluguel de um carro para o mesmo usuário
+  - Ao fazer a devolucao de um carro deve ser atualizado o status do carro para disponivel
+  - Ao fazer a devolucao de um carro o usuário deve estar disponivel para realizar novos alugueis
+  - Ao fazer a devolucao de um carro deve ser calculado o valor do aluguel
+  - Ao fazer a devolucao de um carro em um periodo menor que 24 horas deve ser cobrado o valor total do aluguel
+  - Ao fazer a devolucao de um carro em um periodo maior que o previsto deve ser calculado o valor do aluguel mais a multa proporcional ao periodo de atraso
+  - Ao fazer a devolucao de um carro, caso haja multa deve ser acrescido no valor do aluguel o valor da multa

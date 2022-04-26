@@ -6,6 +6,25 @@ import { Rental } from '../../domain/entities/rental';
 
 export class RentalRepositoryPrisma implements IRentalRepository {
   constructor(private readonly prisma: PrismaClient) {}
+  async updateStatues(rentalId: string, endDate: Date): Promise<void> {
+    await this.prisma.rental.update({
+      where: {
+        id: rentalId,
+      },
+      data: {
+        endDate,
+      },
+    });
+  }
+  async findById(id: string): Promise<Rental> {
+    const rental = await this.prisma.rental.findUnique({
+      where: {
+        id,
+      },
+    });
+
+    return rental;
+  }
 
   async create(rentalInput: CreateRentalDTO): Promise<Rental> {
     const rental = await this.prisma.rental.create({

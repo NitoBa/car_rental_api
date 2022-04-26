@@ -54,10 +54,10 @@ export class CreateRentalUsecase {
       );
     }
 
-    const isMoreThan24Hours =
+    const isLessThan24Hours =
       this.handleDate.isMoreThan24Hours(expectReturnDate);
 
-    if (isMoreThan24Hours) {
+    if (isLessThan24Hours) {
       throw new Error(
         `The expected return date must be at least 24 hours from now`
       );

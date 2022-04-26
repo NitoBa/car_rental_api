@@ -1,3 +1,4 @@
 export interface IHandleDateRepository {
-  isMoreThan24Hours(date1: Date): boolean;
+  isMoreThan24Hours(date: Date): boolean;
+  compareInDays(startDate: Date, endDate: Date): number;
 }
