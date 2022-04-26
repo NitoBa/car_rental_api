@@ -1,4 +1,4 @@
-import { GetAllCategoriesUsecase } from '../../application/usecases/GetAllCategories/get-all-categories-usecase';
+import { GetAllCategoriesUsecase } from '../../application/usecases/getAllCategories/get-all-categories-usecase';
 import { badRequest, ok } from '../helpers/http-response-helper';
 import { IController } from '../interfaces/controller';
 import { HttpResponse } from '../interfaces/http-response';

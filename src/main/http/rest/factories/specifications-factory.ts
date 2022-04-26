@@ -1,7 +1,7 @@
 import { CreateSpecificationUsecase } from '../../../../application/usecases/createSpecification/create-specification-usecase';
 import { CreateSpecificationCarUseCase } from '../../../../application/usecases/createSpecificationCar/create-specification-car-usecase';
-import { GetAllSpecificationsUsecase } from '../../../../application/usecases/GetAllSpecifications/get-all-specifications-usecase';
-import { GetSpecificationByIdUsecase } from '../../../../application/usecases/GetSpecificationById/get-specification-by-id-usecase';
+import { GetAllSpecificationsUsecase } from '../../../../application/usecases/getAllSpecifications/get-all-specifications-usecase';
+import { GetSpecificationByIdUsecase } from '../../../../application/usecases/getSpecificationById/get-specification-by-id-usecase';
 import { prisma } from '../../../../external/database/prisma-service';
 import { CarsRepositoryPrisma } from '../../../../infra/repositories/cars-repository-prisma';
 import { SpecificationRepositoryPrisma } from '../../../../infra/repositories/specification-repository-prisma';
