@@ -4,7 +4,9 @@ import { UpdateUserAvatarUsecase } from '../../../../application/usecases/update
 import { prisma } from '../../../../external/database/prisma-service';
 import { EncryptRepositoryBcrypt } from '../../../../infra/repositories/encrypt-repository-bcrypt';
 import { FileSystemRepository } from '../../../../infra/repositories/file-system-repository';
+import { HandleDateRepositoryDayJs } from '../../../../infra/repositories/handle-date-repository-dayjs';
 import { JwtRepository } from '../../../../infra/repositories/jwt-repository';
+import { UserTokenRepository } from '../../../../infra/repositories/user-tokens-repository-prisma';
 import { UsersRepositoryPrisma } from '../../../../infra/repositories/users-repository-prisma';
 import { AuthenticateUserController } from '../../../../presentation/controllers/authenticate-user-controller';
 import { CreateUserController } from '../../../../presentation/controllers/create-user-controller';
@@ -14,6 +16,8 @@ import { EnsureAuthenticatedMiddleware } from '../middlewares/ensure-authenticat
 const usersRepository = new UsersRepositoryPrisma(prisma);
 const encryptRepository = new EncryptRepositoryBcrypt();
 const jwtRepository = new JwtRepository();
+const usersTokensRepository = new UserTokenRepository(prisma);
+const handleDateRepository = new HandleDateRepositoryDayJs();
 
 export const createCreateUserController = () => {
   const usecase = new CreateUserUsecase(usersRepository, encryptRepository);
@@ -24,7 +28,9 @@ export const createAuthenticateUserController = () => {
   const usecase = new LoginEmailPasswordUsecase(
     usersRepository,
     encryptRepository,
-    jwtRepository
+    jwtRepository,
+    usersTokensRepository,
+    handleDateRepository
   );
 
   return new AuthenticateUserController(usecase);

@@ -1,16 +1,22 @@
 import { InMemoryEncryptRepository } from '../../../tests/repositories/in-memory-encrytor-repository';
+import { InMemoryHandleDateRepository } from '../../../tests/repositories/in-memory-handle-date-repository';
 import { InMemoryJWTRepository } from '../../../tests/repositories/in-memory-jwt-repository';
 import { InMemoryUserRepository } from '../../../tests/repositories/in-memory-user-repository';
+import { InMemoryUserTokenRepository } from '../../../tests/repositories/in-memory-user-token-repository';
 import { LoginEmailPasswordUsecase } from './login-email-password-usecase';
 
 const makeSut = () => {
   const jwtRepository = new InMemoryJWTRepository();
   const encryptRepository = new InMemoryEncryptRepository();
   const userRepository = new InMemoryUserRepository();
+  const userTokenRepository = new InMemoryUserTokenRepository();
+  const handleDateRepository = new InMemoryHandleDateRepository();
   const sut = new LoginEmailPasswordUsecase(
     userRepository,
     encryptRepository,
-    jwtRepository
+    jwtRepository,
+    userTokenRepository,
+    handleDateRepository
   );
 
   return {
@@ -18,6 +24,8 @@ const makeSut = () => {
     jwtRepository,
     encryptRepository,
     userRepository,
+    userTokenRepository,
+    handleDateRepository,
   };
 };
 

@@ -1,6 +1,13 @@
 import { IHandleDateRepository } from '../../application/repositories/handle-date-repository';
 
 export class InMemoryHandleDateRepository implements IHandleDateRepository {
+  addHours(hours: number): Date {
+    const date = new Date();
+
+    date.setHours(date.getHours() + hours);
+
+    return date;
+  }
   nowDate = new Date();
   compareInDays(startDate: Date, endDate: Date): number {
     const startDateUTC = new Date(startDate).toUTCString();

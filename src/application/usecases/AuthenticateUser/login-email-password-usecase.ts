@@ -1,9 +1,12 @@
+import { IHandleDateRepository } from '../../repositories/handle-date-repository';
 import { IEncryptRepository } from '../../repositories/iencrypt-repository';
 import { IJwtRepository } from '../../repositories/ijwt-repository';
+import { IUserTokenRepository } from '../../repositories/iuser-token-repository';
 import { IUsersRepository } from '../../repositories/iusers-repository';
 
 type LoginResponse = {
   token: string;
+  refreshToken: string;
   user: {
     id: string;
     name: string;
@@ -16,7 +19,9 @@ export class LoginEmailPasswordUsecase {
   constructor(
     private readonly userRepository: IUsersRepository,
     private readonly encryptRepository: IEncryptRepository,
-    private readonly jwtRepository: IJwtRepository
+    private readonly jwtRepository: IJwtRepository,
+    private readonly userTokenRepository: IUserTokenRepository,
+    private readonly handleDateRepository: IHandleDateRepository
   ) {}
 
   async execute(email: string, password: string): Promise<LoginResponse> {
@@ -43,6 +48,19 @@ export class LoginEmailPasswordUsecase {
       username: user.username,
     });
 
+    const refreshToken = this.jwtRepository.signRefreshToken(user.id, {
+      token,
+      email: user.email,
+    });
+
+    const expiresDate = this.handleDateRepository.addHours(1);
+
+    await this.userTokenRepository.create({
+      userId: user.id,
+      expiresDate,
+      refreshToken,
+    });
+
     return {
       user: {
         id: user.id,
@@ -51,6 +69,7 @@ export class LoginEmailPasswordUsecase {
         email: user.email,
       },
       token,
+      refreshToken,
     };
   }
 }
