@@ -1,4 +1,4 @@
-import { GetSpecificationByIdUsecase } from '../../application/usecases/GetSpecificationById/get-specification-by-id-usecase';
+import { GetSpecificationByIdUsecase } from '../../application/usecases/getSpecificationById/get-specification-by-id-usecase';
 import { badRequest, ok } from '../helpers/http-response-helper';
 import { IController } from '../interfaces/controller';
 import { HttpResponse } from '../interfaces/http-response';
