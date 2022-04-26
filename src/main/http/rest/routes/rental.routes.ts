@@ -5,6 +5,7 @@ import { adaptRouter } from '../adapters/express-router-adapter';
 import { createEnsureAuthenticatedMiddleware } from '../factories/account-factory';
 import {
   createDevolutionRentalController,
+  createListUserRentalsController,
   createRentalController,
 } from '../factories/rental-factory';
 
@@ -20,6 +21,12 @@ rentalRouter.post(
   '/devolution/:rentalId',
   adaptMiddleware(createEnsureAuthenticatedMiddleware()),
   adaptRouter(createDevolutionRentalController())
+);
+
+rentalRouter.get(
+  '/',
+  adaptMiddleware(createEnsureAuthenticatedMiddleware()),
+  adaptRouter(createListUserRentalsController())
 );
 
 export { rentalRouter };
