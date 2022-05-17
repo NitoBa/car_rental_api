@@ -128,6 +128,7 @@
   - Não deve ser possível realizar o aluguel de um carro se já existe um em aberto para o mesmo carro
   - O aluguel de um carro deve ter duracão mínima de 24 horas
   
+---
   
 # Devolucao de um carro
   **RF** Requisitos funcionais:
@@ -144,3 +145,18 @@
   - Ao fazer a devolucao de um carro em um periodo menor que 24 horas deve ser cobrado o valor total do aluguel
   - Ao fazer a devolucao de um carro em um periodo maior que o previsto deve ser calculado o valor do aluguel mais a multa proporcional ao periodo de atraso
   - Ao fazer a devolucao de um carro, caso haja multa deve ser acrescido no valor do aluguel o valor da multa
+
+  --- 
+# Recuperar senha
+
+  **RF** Requisitos funcionais:
+  - Deve ser possível recuperar a senha de um usuário através de um email informado
+  - Deseja-se que o usuário receba um email com um link para recuperar a senha
+  - Deseja-se que o usuário tenha acesso ao sistema após recuperar a senha
+
+  **RNF** Requisitos não funcionais:
+
+  **RN** Regras de negócio:
+  - Deseja-se que o link seja valido por 3 horas
+  - Não deve ser possível recuperar a senha de um usuário sem inserir uma nova senha
+
