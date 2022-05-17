@@ -8,6 +8,7 @@ import {
   createAuthenticateUserController,
   createCreateUserController,
   createEnsureAuthenticatedMiddleware,
+  createSendForgotPasswordEmailController,
   createUpdateUserAvatarController,
 } from '../factories/account-factory';
 
@@ -26,6 +27,11 @@ accountRouter.patch(
   adaptMiddleware(createEnsureAuthenticatedMiddleware()),
   uploadAvatar.single('avatar'),
   adaptRouter(createUpdateUserAvatarController())
+);
+
+accountRouter.post(
+  '/forgot-password',
+  adaptRouter(createSendForgotPasswordEmailController())
 );
 
 export { accountRouter };

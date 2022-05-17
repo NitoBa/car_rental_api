@@ -1,17 +1,20 @@
 import { LoginEmailPasswordUsecase } from '../../../../application/usecases/AuthenticateUser/login-email-password-usecase';
 import { CreateRefreshTokenUsecase } from '../../../../application/usecases/createRefreshToken/create-refresh-token-usecase';
 import { CreateUserUsecase } from '../../../../application/usecases/createUser/create-user-usecase';
+import { SendForgotPasswordMailUsecase } from '../../../../application/usecases/sendForgotPasswordMail/send-forgot-password-email';
 import { UpdateUserAvatarUsecase } from '../../../../application/usecases/updateUserAvatar/update-user-avatar-usecase';
 import { prisma } from '../../../../external/database/prisma-service';
 import { EncryptRepositoryBcrypt } from '../../../../infra/repositories/encrypt-repository-bcrypt';
 import { FileSystemRepository } from '../../../../infra/repositories/file-system-repository';
 import { HandleDateRepositoryDayJs } from '../../../../infra/repositories/handle-date-repository-dayjs';
 import { JwtRepository } from '../../../../infra/repositories/jwt-repository';
+import { SendEmailRepository } from '../../../../infra/repositories/send-email-repository';
 import { UserTokenRepository } from '../../../../infra/repositories/user-tokens-repository-prisma';
 import { UsersRepositoryPrisma } from '../../../../infra/repositories/users-repository-prisma';
 import { AuthenticateUserController } from '../../../../presentation/controllers/authenticate-user-controller';
 import { CreateUserController } from '../../../../presentation/controllers/create-user-controller';
 import { CreateRefreshTokenController } from '../../../../presentation/controllers/createRefreshToken/create-refresh-token-controller';
+import { SendForgotPasswordEmailController } from '../../../../presentation/controllers/forgotPassword/forgot-password-controller';
 import { UpdateUserAvatarController } from '../../../../presentation/controllers/update-user-avatar-controller';
 import { EnsureAuthenticatedMiddleware } from '../middlewares/ensure-authenticated';
 
@@ -56,4 +59,10 @@ export const createRefreshTokenController = () => {
   );
 
   return new CreateRefreshTokenController(usecase);
+};
+
+export const createSendForgotPasswordEmailController = () => {
+  const repository = new SendEmailRepository();
+  const usecase = new SendForgotPasswordMailUsecase(repository);
+  return new SendForgotPasswordEmailController(usecase);
 };
