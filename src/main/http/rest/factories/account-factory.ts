@@ -1,4 +1,5 @@
 import { LoginEmailPasswordUsecase } from '../../../../application/usecases/AuthenticateUser/login-email-password-usecase';
+import { CreateRefreshTokenUsecase } from '../../../../application/usecases/createRefreshToken/create-refresh-token-usecase';
 import { CreateUserUsecase } from '../../../../application/usecases/createUser/create-user-usecase';
 import { UpdateUserAvatarUsecase } from '../../../../application/usecases/updateUserAvatar/update-user-avatar-usecase';
 import { prisma } from '../../../../external/database/prisma-service';
@@ -10,6 +11,7 @@ import { UserTokenRepository } from '../../../../infra/repositories/user-tokens-
 import { UsersRepositoryPrisma } from '../../../../infra/repositories/users-repository-prisma';
 import { AuthenticateUserController } from '../../../../presentation/controllers/authenticate-user-controller';
 import { CreateUserController } from '../../../../presentation/controllers/create-user-controller';
+import { CreateRefreshTokenController } from '../../../../presentation/controllers/createRefreshToken/create-refresh-token-controller';
 import { UpdateUserAvatarController } from '../../../../presentation/controllers/update-user-avatar-controller';
 import { EnsureAuthenticatedMiddleware } from '../middlewares/ensure-authenticated';
 
@@ -44,4 +46,14 @@ export const createUpdateUserAvatarController = () => {
   const repository = new FileSystemRepository();
   const usecase = new UpdateUserAvatarUsecase(usersRepository, repository);
   return new UpdateUserAvatarController(usecase);
+};
+
+export const createRefreshTokenController = () => {
+  const usecase = new CreateRefreshTokenUsecase(
+    usersTokensRepository,
+    jwtRepository,
+    handleDateRepository
+  );
+
+  return new CreateRefreshTokenController(usecase);
 };
