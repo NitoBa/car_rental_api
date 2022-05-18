@@ -1,6 +1,7 @@
 import { LoginEmailPasswordUsecase } from '../../../../application/usecases/AuthenticateUser/login-email-password-usecase';
 import { CreateRefreshTokenUsecase } from '../../../../application/usecases/createRefreshToken/create-refresh-token-usecase';
 import { CreateUserUsecase } from '../../../../application/usecases/createUser/create-user-usecase';
+import { ResetPasswordUsecase } from '../../../../application/usecases/resetPassword/reset-password-usecase';
 import { SendForgotPasswordMailUsecase } from '../../../../application/usecases/sendForgotPasswordMail/send-forgot-password-email';
 import { UpdateUserAvatarUsecase } from '../../../../application/usecases/updateUserAvatar/update-user-avatar-usecase';
 import { prisma } from '../../../../external/database/prisma-service';
@@ -15,6 +16,7 @@ import { AuthenticateUserController } from '../../../../presentation/controllers
 import { CreateUserController } from '../../../../presentation/controllers/create-user-controller';
 import { CreateRefreshTokenController } from '../../../../presentation/controllers/createRefreshToken/create-refresh-token-controller';
 import { SendForgotPasswordEmailController } from '../../../../presentation/controllers/forgotPassword/forgot-password-controller';
+import { ResetPasswordController } from '../../../../presentation/controllers/resetPassword/reset-password-controller';
 import { UpdateUserAvatarController } from '../../../../presentation/controllers/update-user-avatar-controller';
 import { EnsureAuthenticatedMiddleware } from '../middlewares/ensure-authenticated';
 
@@ -70,4 +72,9 @@ export const createSendForgotPasswordEmailController = () => {
     handleDateRepository
   );
   return new SendForgotPasswordEmailController(usecase);
+};
+
+export const createResetPasswordController = () => {
+  const usecase = new ResetPasswordUsecase();
+  return new ResetPasswordController(usecase);
 };

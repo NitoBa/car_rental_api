@@ -8,6 +8,7 @@ import {
   createAuthenticateUserController,
   createCreateUserController,
   createEnsureAuthenticatedMiddleware,
+  createResetPasswordController,
   createSendForgotPasswordEmailController,
   createUpdateUserAvatarController,
 } from '../factories/account-factory';
@@ -32,6 +33,11 @@ accountRouter.patch(
 accountRouter.post(
   '/forgot-password',
   adaptRouter(createSendForgotPasswordEmailController())
+);
+
+accountRouter.post(
+  '/reset-password',
+  adaptRouter(createResetPasswordController())
 );
 
 export { accountRouter };
