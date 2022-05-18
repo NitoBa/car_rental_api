@@ -8,7 +8,7 @@ import { EncryptRepositoryBcrypt } from '../../../../infra/repositories/encrypt-
 import { FileSystemRepository } from '../../../../infra/repositories/file-system-repository';
 import { HandleDateRepositoryDayJs } from '../../../../infra/repositories/handle-date-repository-dayjs';
 import { JwtRepository } from '../../../../infra/repositories/jwt-repository';
-import { SendEmailRepository } from '../../../../infra/repositories/send-email-repository';
+import { MailRepositoryEthereal } from '../../../../infra/repositories/mail-repository-ethereal';
 import { UserTokenRepository } from '../../../../infra/repositories/user-tokens-repository-prisma';
 import { UsersRepositoryPrisma } from '../../../../infra/repositories/users-repository-prisma';
 import { AuthenticateUserController } from '../../../../presentation/controllers/authenticate-user-controller';
@@ -62,7 +62,12 @@ export const createRefreshTokenController = () => {
 };
 
 export const createSendForgotPasswordEmailController = () => {
-  const repository = new SendEmailRepository();
-  const usecase = new SendForgotPasswordMailUsecase(repository);
+  const repository = new MailRepositoryEthereal();
+  const usecase = new SendForgotPasswordMailUsecase(
+    repository,
+    usersRepository,
+    usersTokensRepository,
+    handleDateRepository
+  );
   return new SendForgotPasswordEmailController(usecase);
 };
