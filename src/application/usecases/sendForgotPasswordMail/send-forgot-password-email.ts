@@ -1,4 +1,6 @@
 import { randomUUID } from 'node:crypto';
+import { readFileSync } from 'node:fs';
+import { resolve } from 'node:path';
 
 import { IMailRepository } from '../../repositories/email-repository';
 import { IHandleDateRepository } from '../../repositories/handle-date-repository';
@@ -32,22 +34,20 @@ export class SendForgotPasswordMailUsecase {
       expiresDate,
     });
 
-    const message = [
-      '<h1>Olá, Tudo bem?</h1>',
-      '<br />',
-      '<p>Você solicitou uma nova senha</p>',
-      '<br />',
-      '<p>Click no link abaixou para recuperar a sua senha</p>',
-      '<br />',
-      `<a href='http://localhost:3000/reset-password/${newToken.refreshToken}'>
-        <button>Recuperar senha</button>
-      </a>`,
-    ];
+    const forgotPasswordEmailTemplate = readFileSync(
+      resolve(
+        __dirname,
+        '../../../presentation/views/forgot-password-email.html'
+      )
+    ).toString('utf-8');
 
-    await this.sendEmailRepository.sendMail(
-      email,
-      'Forgot Password',
-      message.join('\n')
-    );
+    const message = forgotPasswordEmailTemplate
+      .replace('{username}', user.name)
+      .replace(
+        '{link}',
+        `http://localhost:3333/reset-password?token=${newToken.refreshToken}`
+      );
+
+    await this.sendEmailRepository.sendMail(email, 'Forgot Password', message);
   }
 }
