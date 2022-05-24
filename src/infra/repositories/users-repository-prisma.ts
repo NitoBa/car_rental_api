@@ -6,6 +6,14 @@ import { User } from '../../domain/entities/user';
 
 export class UsersRepositoryPrisma implements IUsersRepository {
   constructor(private prisma: PrismaClient) {}
+  async updatePassword(userId: string, password: string): Promise<void> {
+    await this.prisma.user.update({
+      where: { id: userId },
+      data: {
+        password,
+      },
+    });
+  }
   async updateUserAvatar(id: string, avatar: string): Promise<void> {
     await this.prisma.user.update({
       where: { id },

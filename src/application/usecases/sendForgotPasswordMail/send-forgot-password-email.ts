@@ -45,7 +45,7 @@ export class SendForgotPasswordMailUsecase {
       .replace('{username}', user.name)
       .replace(
         '{link}',
-        `http://localhost:3333/reset-password?token=${newToken.refreshToken}`
+        `http://localhost:3333/account/reset-password/${newToken.refreshToken}`
       );
 
     await this.sendEmailRepository.sendMail(email, 'Forgot Password', message);

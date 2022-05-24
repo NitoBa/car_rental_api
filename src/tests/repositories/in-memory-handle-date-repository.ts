@@ -8,6 +8,18 @@ export class InMemoryHandleDateRepository implements IHandleDateRepository {
 
     return date;
   }
+
+  compareInHours(startDate: Date, endDate: Date): number {
+    const startDateUTC = new Date(startDate).toUTCString();
+
+    const endDateUTC = new Date(endDate).toUTCString();
+
+    const compareInHours =
+      new Date(endDateUTC).getTime() - new Date(startDateUTC).getTime();
+
+    return compareInHours / (60 * 60 * 1000); // 1 hour;
+  }
+
   nowDate = new Date();
   compareInDays(startDate: Date, endDate: Date): number {
     const startDateUTC = new Date(startDate).toUTCString();

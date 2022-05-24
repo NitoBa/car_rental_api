@@ -6,6 +6,14 @@ import { IHandleDateRepository } from '../../application/repositories/handle-dat
 dayjs.extend(utc);
 
 export class HandleDateRepositoryDayJs implements IHandleDateRepository {
+  compareInHours(startDate: Date, endDate: Date): number {
+    const endDataUTC = dayjs(endDate).utc().local().format();
+    const startDateUTC = dayjs(startDate).utc().local().format();
+
+    const compareInHours = dayjs(endDataUTC).diff(startDateUTC, 'hours');
+
+    return compareInHours;
+  }
   addHours(hours: number): Date {
     const now = dayjs().utc().local();
 

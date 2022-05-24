@@ -4,6 +4,13 @@ import { User } from '../../domain/entities/user';
 
 export class InMemoryUserRepository implements IUsersRepository {
   users: User[] = [];
+
+  async updatePassword(userId: string, password: string): Promise<void> {
+    const user = this.users.find((user) => user.id === userId);
+    const indexUser = this.users.indexOf(user);
+    user.password = password;
+    this.users[indexUser] = user;
+  }
   async findUserByEmail(email: string): Promise<User> {
     return this.users.find((user) => user.email === email);
   }

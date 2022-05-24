@@ -3,11 +3,27 @@ import { badRequest, ok } from '../../helpers/http-response-helper';
 import { IController } from '../../interfaces/controller';
 import { HttpResponse } from '../../interfaces/http-response';
 
-export class ResetPasswordController implements IController {
+type ResetPasswordRequest = {
+  body: {
+    password: string;
+  };
+  params: {
+    token: string;
+  };
+};
+
+export class ResetPasswordController
+  implements IController<ResetPasswordRequest>
+{
   constructor(private readonly resetPasswordUsecase: ResetPasswordUsecase) {}
-  async handle(request: any): Promise<HttpResponse> {
+  async handle(request: ResetPasswordRequest): Promise<HttpResponse> {
     try {
-      await this.resetPasswordUsecase.execute();
+      const { password } = request.body;
+      const { token } = request.params;
+      await this.resetPasswordUsecase.execute({
+        password,
+        token,
+      });
       return ok({ message: 'Reset password successfully' });
     } catch (error) {
       return badRequest(error);

@@ -6,6 +6,15 @@ import { UserTokens } from '../../domain/entities/user-tokens';
 
 export class UserTokenRepository implements IUserTokenRepository {
   constructor(private readonly prisma: PrismaClient) {}
+  async findByToken(token: string): Promise<UserTokens> {
+    const userToken = await this.prisma.userToken.findFirst({
+      where: {
+        refreshToken: token,
+      },
+    });
+
+    return userToken;
+  }
   async deleteById(id: string): Promise<void> {
     await this.prisma.userToken.delete({
       where: {

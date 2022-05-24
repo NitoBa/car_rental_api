@@ -75,6 +75,11 @@ export const createSendForgotPasswordEmailController = () => {
 };
 
 export const createResetPasswordController = () => {
-  const usecase = new ResetPasswordUsecase();
+  const usecase = new ResetPasswordUsecase(
+    usersRepository,
+    usersTokensRepository,
+    handleDateRepository,
+    encryptRepository
+  );
   return new ResetPasswordController(usecase);
 };

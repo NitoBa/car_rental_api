@@ -4,6 +4,12 @@ import { UserTokens } from '../../domain/entities/user-tokens';
 
 export class InMemoryUserTokenRepository implements IUserTokenRepository {
   userTokens: UserTokens[] = [];
+  async findByToken(token: string): Promise<UserTokens> {
+    const userToken = this.userTokens.find(
+      (userToken) => userToken.refreshToken === token
+    );
+    return userToken;
+  }
   async deleteById(id: string): Promise<void> {
     this.userTokens = this.userTokens.filter(
       (userToken) => userToken.id !== id
